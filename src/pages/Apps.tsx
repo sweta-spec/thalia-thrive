@@ -1,52 +1,65 @@
 import { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import Layout from "@/components/Layout";
 import SectionHeading from "@/components/SectionHeading";
 import AppCard from "@/components/AppCard";
 import { apps } from "@/data/apps";
+import appsImg from "@/assets/apps-mosaic.png";
 
-const platforms = ["All", "Shopify", "Amazon+Shopify", "BigCommerce", "API"];
+const platforms = ["All", "Shopify", "Amazon", "BigCommerce", "API"];
 
 const Apps = () => {
   const [filter, setFilter] = useState("All");
-  const filtered = filter === "All" ? apps : apps.filter((a) => a.platform === filter || (filter === "Shopify" && a.platform.includes("Shopify")));
+  const filtered = filter === "All"
+    ? apps
+    : apps.filter((a) => {
+        if (filter === "Amazon") return a.platform.includes("Amazon");
+        if (filter === "Shopify") return a.platform.includes("Shopify");
+        return a.platform === filter;
+      });
 
   return (
     <Layout>
       {/* Hero */}
-      <section className="relative overflow-hidden" style={{ paddingTop: 100, paddingBottom: 60 }}>
-        <div className="absolute inset-0 pointer-events-none" style={{
-          background: "radial-gradient(ellipse 60% 50% at 50% 0%, rgba(41,201,240,0.06) 0%, transparent 70%)"
-        }} />
+      <section className="section-alt relative overflow-hidden" style={{ paddingTop: 80, paddingBottom: 60 }}>
         <div className="section-container relative text-center">
-          <SectionHeading title="20 Apps. One Mission." description="Every app we build solves a real commerce challenge — from dropshipping and inventory sync to invoicing and price optimization." />
+          <SectionHeading title="Every App. One Mission." description="We build focused, powerful tools for ecommerce merchants. No bloat, no noise — just software that works." />
         </div>
       </section>
 
       {/* Filter & Grid */}
-      <section style={{ paddingBottom: 100 }}>
+      <section style={{ paddingTop: 48, paddingBottom: 96 }}>
         <div className="section-container">
           <div className="flex flex-wrap gap-2 justify-center mb-10">
             {platforms.map((p) => (
               <button
                 key={p}
                 onClick={() => setFilter(p)}
-                className="px-5 py-2.5 rounded-full text-sm font-bold font-heading transition-all"
-                style={{
-                  background: filter === p ? "#29C9F0" : "#fff",
-                  color: filter === p ? "#0D0D14" : "#8888A0",
-                  border: filter === p ? "none" : "1px solid #E4EAF0",
-                }}
+                className={`px-5 py-2.5 rounded-lg text-sm font-bold font-heading transition-all ${
+                  filter === p
+                    ? "bg-primary text-primary-foreground"
+                    : "bg-background text-muted-foreground border border-border hover:border-primary"
+                }`}
               >
-                {p === "Amazon+Shopify" ? "Amazon + Shopify" : p}
+                {p === "Amazon" ? "Amazon" : p}
               </button>
             ))}
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
-            {filtered.map((app, i) => (
-              <AppCard key={app.slug} app={app} index={i} />
-            ))}
-          </div>
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={filter}
+              initial={{ opacity: 0, y: 12 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -12 }}
+              transition={{ duration: 0.3 }}
+              className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5"
+            >
+              {filtered.map((app, i) => (
+                <AppCard key={app.slug} app={app} index={i} />
+              ))}
+            </motion.div>
+          </AnimatePresence>
         </div>
       </section>
     </Layout>
