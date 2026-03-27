@@ -1,9 +1,11 @@
 import { useParams, Link } from "react-router-dom";
+import { motion } from "framer-motion";
 import Layout from "@/components/Layout";
 import AppCard from "@/components/AppCard";
 import { apps, getPlatformColor, getPlatformLabel } from "@/data/apps";
 import NotFound from "./NotFound";
 import { useState } from "react";
+import { ArrowRight } from "lucide-react";
 
 const howItWorks = [
   { step: "01", title: "Install the App", desc: "Add to your store in one click from the app store" },
@@ -26,44 +28,38 @@ const AppDetail = () => {
     <Layout>
       {/* Breadcrumb */}
       <div className="section-container pt-6">
-        <nav className="text-sm font-body" style={{ color: "#8888A0" }}>
-          <Link to="/" className="hover:underline">Home</Link>
+        <nav className="text-sm font-body text-muted-foreground">
+          <Link to="/" className="hover:text-primary transition-colors">Home</Link>
           <span className="mx-2">›</span>
-          <Link to="/apps" className="hover:underline">Apps</Link>
+          <Link to="/apps" className="hover:text-primary transition-colors">Apps</Link>
           <span className="mx-2">›</span>
-          <span style={{ color: "#0D0D14" }}>{app.name}</span>
+          <span className="text-foreground">{app.name}</span>
         </nav>
       </div>
 
       {/* Hero */}
       <section className="relative overflow-hidden" style={{ paddingTop: 60, paddingBottom: 80 }}>
         <div className="absolute inset-0 pointer-events-none" style={{
-          background: "radial-gradient(ellipse 60% 50% at 50% 0%, rgba(41,201,240,0.06) 0%, transparent 70%)"
+          background: "radial-gradient(ellipse 60% 50% at 50% 0%, hsla(231,91%,64%,0.05) 0%, transparent 70%)"
         }} />
         <div className="section-container relative">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <div>
-              <span className="inline-block text-xs font-bold font-body px-3 py-1 rounded-full mb-4"
+              <span className="inline-block text-xs font-bold font-body px-3 py-1 rounded-lg mb-4"
                 style={{ backgroundColor: `${platformColor}14`, color: platformColor }}>
                 {getPlatformLabel(app.platform)}
               </span>
-              <h1 className="font-heading font-extrabold text-4xl sm:text-5xl lg:text-6xl mb-4" style={{ color: "#0D0D14", letterSpacing: "-2px" }}>
+              <h1 className="font-heading font-extrabold text-h1 mb-4 text-foreground">
                 {app.name}
               </h1>
-              <p className="font-body text-lg leading-relaxed mb-8" style={{ color: "#3D3D4E" }}>
+              <p className="font-body text-lg leading-relaxed mb-8 text-muted-foreground">
                 {app.description}
               </p>
 
               {app.comingSoon ? (
                 <div className="flex gap-3">
-                  <input
-                    type="email"
-                    value={notifyEmail}
-                    onChange={e => setNotifyEmail(e.target.value)}
-                    placeholder="Enter your email"
-                    className="flex-1 px-5 py-3 rounded-xl border font-body text-sm"
-                    style={{ borderColor: "#E4EAF0" }}
-                  />
+                  <input type="email" value={notifyEmail} onChange={e => setNotifyEmail(e.target.value)}
+                    placeholder="Enter your email" className="flex-1 px-5 py-3 rounded-xl border border-border font-body text-sm" />
                   <button className="btn-primary">Notify Me</button>
                 </div>
               ) : (
@@ -71,12 +67,12 @@ const AppDetail = () => {
                   <div className="flex flex-col sm:flex-row gap-3 mb-6">
                     {app.externalUrl !== "#" && (
                       <a href={app.externalUrl} target="_blank" rel="noopener noreferrer" className="btn-primary text-base px-8 py-4">
-                        Install Free →
+                        Install Free <ArrowRight className="ml-2 h-4 w-4 inline" />
                       </a>
                     )}
                     <Link to="/contact" className="btn-outline text-base px-8 py-4">Contact Sales</Link>
                   </div>
-                  <p className="text-sm font-body" style={{ color: "#8888A0" }}>
+                  <p className="text-sm font-body text-muted-foreground">
                     ⭐ {app.stats[1]?.value || "4.8★"} rating · {app.stats[0]?.value || "10,000+"} installs
                   </p>
                 </>
@@ -96,17 +92,17 @@ const AppDetail = () => {
       {!app.comingSoon && (
         <>
           {/* Features */}
-          <section className="section-alt" style={{ paddingTop: 100, paddingBottom: 100 }}>
+          <section className="section-alt" style={{ paddingTop: 96, paddingBottom: 96 }}>
             <div className="section-container">
               <div className="text-center mb-12">
-                <span className="inline-block font-heading font-bold text-xs uppercase tracking-[2px] mb-3" style={{ color: "#29C9F0" }}>KEY FEATURES</span>
-                <h2 className="font-heading font-extrabold text-3xl sm:text-4xl" style={{ color: "#0D0D14", letterSpacing: "-1px" }}>Everything You Need</h2>
+                <span className="inline-block font-heading font-bold text-xs uppercase tracking-[0.12em] mb-3 text-primary">KEY FEATURES</span>
+                <h2 className="font-heading font-extrabold text-h2 text-foreground">Everything You Need</h2>
               </div>
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
                 {app.features.map(f => (
                   <div key={f} className="card-elevated p-6">
-                    <div className="w-10 h-10 rounded-xl flex items-center justify-center text-lg mb-3" style={{ background: "rgba(41,201,240,0.1)" }}>✓</div>
-                    <h3 className="font-heading font-bold text-base mb-1" style={{ color: "#0D0D14" }}>{f}</h3>
+                    <div className="w-10 h-10 rounded-xl flex items-center justify-center text-lg mb-3 bg-secondary text-primary">✓</div>
+                    <h3 className="font-heading font-bold text-base mb-1 text-foreground">{f}</h3>
                   </div>
                 ))}
               </div>
@@ -114,21 +110,21 @@ const AppDetail = () => {
           </section>
 
           {/* How It Works */}
-          <section style={{ paddingTop: 100, paddingBottom: 100 }}>
+          <section style={{ paddingTop: 96, paddingBottom: 96 }}>
             <div className="section-container">
               <div className="text-center mb-12">
-                <span className="inline-block font-heading font-bold text-xs uppercase tracking-[2px] mb-3" style={{ color: "#29C9F0" }}>HOW IT WORKS</span>
-                <h2 className="font-heading font-extrabold text-3xl sm:text-4xl" style={{ color: "#0D0D14", letterSpacing: "-1px" }}>Get Started in Minutes</h2>
+                <span className="inline-block font-heading font-bold text-xs uppercase tracking-[0.12em] mb-3 text-primary">HOW IT WORKS</span>
+                <h2 className="font-heading font-extrabold text-h2 text-foreground">Get Started in Minutes</h2>
               </div>
               <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
                 {howItWorks.map((s, i) => (
                   <div key={s.step} className="text-center relative">
-                    <div className="w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4 font-heading font-extrabold text-xl" style={{ background: "rgba(41,201,240,0.1)", color: "#29C9F0" }}>
+                    <div className="w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4 font-heading font-extrabold text-xl bg-secondary text-primary">
                       {s.step}
                     </div>
-                    <h3 className="font-heading font-bold text-lg mb-2" style={{ color: "#0D0D14" }}>{s.title}</h3>
-                    <p className="text-sm font-body" style={{ color: "#8888A0" }}>{s.desc}</p>
-                    {i < 2 && <div className="hidden md:block absolute top-8 right-0 translate-x-1/2 text-2xl" style={{ color: "#E4EAF0" }}>→</div>}
+                    <h3 className="font-heading font-bold text-lg mb-2 text-foreground">{s.title}</h3>
+                    <p className="text-sm font-body text-muted-foreground">{s.desc}</p>
+                    {i < 2 && <div className="hidden md:block absolute top-8 right-0 translate-x-1/2 text-2xl text-border">→</div>}
                   </div>
                 ))}
               </div>
@@ -137,13 +133,13 @@ const AppDetail = () => {
 
           {/* Stats */}
           {app.stats.length > 0 && (
-            <section style={{ background: "rgba(41,201,240,0.06)", paddingTop: 60, paddingBottom: 60 }}>
+            <section className="section-alt" style={{ paddingTop: 60, paddingBottom: 60 }}>
               <div className="section-container">
                 <div className="grid grid-cols-1 sm:grid-cols-3 gap-8 text-center">
                   {app.stats.map(s => (
                     <div key={s.label}>
-                      <div className="font-heading font-extrabold text-4xl" style={{ color: "#29C9F0" }}>{s.value}</div>
-                      <div className="text-sm font-body mt-1" style={{ color: "#8888A0" }}>{s.label}</div>
+                      <div className="font-heading font-extrabold text-4xl text-primary">{s.value}</div>
+                      <div className="text-sm font-body mt-1 text-muted-foreground">{s.label}</div>
                     </div>
                   ))}
                 </div>
@@ -155,16 +151,16 @@ const AppDetail = () => {
           {app.testimonial.quote && (
             <section style={{ paddingTop: 80, paddingBottom: 80 }}>
               <div className="section-container max-w-2xl text-center">
-                <div className="card-elevated p-8" style={{ borderTop: "3px solid #29C9F0" }}>
-                  <div className="flex gap-0.5 justify-center mb-4">{Array(5).fill(0).map((_, i) => <span key={i} style={{ color: "#F5A623" }}>★</span>)}</div>
-                  <p className="font-body text-lg italic leading-relaxed mb-6" style={{ color: "#3D3D4E" }}>"{app.testimonial.quote}"</p>
+                <div className="card-elevated p-8" style={{ borderTop: "3px solid hsl(var(--primary))" }}>
+                  <div className="flex gap-0.5 justify-center mb-4">{Array(5).fill(0).map((_, i) => <span key={i} className="text-yellow-400">★</span>)}</div>
+                  <p className="font-body text-lg italic leading-relaxed mb-6 text-foreground">"{app.testimonial.quote}"</p>
                   <div className="flex items-center justify-center gap-3">
-                    <div className="w-10 h-10 rounded-full flex items-center justify-center font-heading font-bold text-sm" style={{ background: "#29C9F0", color: "#0D0D14" }}>
+                    <div className="w-10 h-10 rounded-full flex items-center justify-center font-heading font-bold text-sm bg-primary text-primary-foreground">
                       {app.testimonial.author.split(" ").map(w => w[0]).join("")}
                     </div>
                     <div className="text-left">
-                      <div className="font-heading font-bold text-sm" style={{ color: "#0D0D14" }}>{app.testimonial.author}</div>
-                      <div className="text-xs font-body" style={{ color: "#8888A0" }}>{app.testimonial.role}</div>
+                      <div className="font-heading font-bold text-sm text-foreground">{app.testimonial.author}</div>
+                      <div className="text-xs font-body text-muted-foreground">{app.testimonial.role}</div>
                     </div>
                   </div>
                 </div>
@@ -176,7 +172,7 @@ const AppDetail = () => {
           {relatedApps.length > 0 && (
             <section className="section-alt" style={{ paddingTop: 80, paddingBottom: 80 }}>
               <div className="section-container">
-                <h2 className="font-heading font-extrabold text-2xl text-center mb-8" style={{ color: "#0D0D14" }}>You Might Also Like</h2>
+                <h2 className="font-heading font-extrabold text-2xl text-center mb-8 text-foreground">You Might Also Like</h2>
                 <div className="grid grid-cols-1 sm:grid-cols-3 gap-5">
                   {relatedApps.map((a, i) => <AppCard key={a.slug} app={a} index={i} />)}
                 </div>
@@ -185,14 +181,14 @@ const AppDetail = () => {
           )}
 
           {/* Install CTA */}
-          <section style={{ background: "linear-gradient(135deg, #29C9F0, #0A97BF)", paddingTop: 80, paddingBottom: 80 }}>
+          <section style={{ background: "linear-gradient(135deg, hsl(var(--primary)), hsl(var(--accent)))", paddingTop: 80, paddingBottom: 80 }}>
             <div className="section-container text-center">
-              <h2 className="font-heading font-extrabold text-3xl text-white mb-4">Ready to Try {app.name}?</h2>
-              <p className="font-body text-lg mb-8" style={{ color: "rgba(255,255,255,0.85)" }}>Free to install. No credit card required.</p>
+              <h2 className="font-heading font-extrabold text-3xl text-primary-foreground mb-4">Ready to Try {app.name}?</h2>
+              <p className="font-body text-lg mb-8 text-primary-foreground/80">Free to install. No credit card required.</p>
               {app.externalUrl !== "#" && (
                 <a href={app.externalUrl} target="_blank" rel="noopener noreferrer"
-                  className="inline-flex items-center justify-center font-heading font-bold text-sm px-8 py-4 rounded-full bg-background" style={{ color: "#29C9F0" }}>
-                  Install Free on {installLabel} →
+                  className="inline-flex items-center justify-center font-heading font-bold text-sm px-8 py-4 rounded-lg bg-background text-primary transition-all hover:scale-102">
+                  Install Free on {installLabel} <ArrowRight className="ml-2 h-4 w-4" />
                 </a>
               )}
             </div>

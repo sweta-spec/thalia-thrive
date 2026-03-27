@@ -1,38 +1,91 @@
+import { useState } from "react";
 import { motion } from "framer-motion";
 import Layout from "@/components/Layout";
 import SectionHeading from "@/components/SectionHeading";
 
+const categories = ["All", "Dropshipping", "Pricing", "Compliance", "Retention", "Multichannel"];
+
 const posts = [
-  { title: "How to Optimize Your Shopify Store for Conversions", date: "Mar 10, 2026", category: "E-commerce", excerpt: "Learn the top strategies to convert more visitors into paying customers on your Shopify store." },
-  { title: "The Rise of Multi-Channel Selling", date: "Mar 5, 2026", category: "Strategy", excerpt: "Why selling on multiple platforms is no longer optional and how to get started." },
-  { title: "5 Tips for Better Product Descriptions", date: "Feb 28, 2026", category: "Marketing", excerpt: "Write product descriptions that sell with these proven copywriting techniques." },
-  { title: "Understanding Amazon FBA for Shopify Sellers", date: "Feb 20, 2026", category: "Fulfillment", excerpt: "A complete guide to leveraging Amazon FBA for your Shopify store fulfillment." },
-  { title: "Pricing Strategies That Drive Revenue", date: "Feb 15, 2026", category: "Growth", excerpt: "Dynamic pricing, bulk discounts, and other tactics to maximize your revenue." },
-  { title: "Building Trust with Product Badges", date: "Feb 10, 2026", category: "Design", excerpt: "How product badges and labels can increase customer confidence and boost sales." },
+  { title: "How to Start Amazon Dropshipping on Shopify in Under an Hour", date: "May 12, 2025", category: "Dropshipping", app: "Spreadr", excerpt: "A step-by-step guide to launching your Amazon dropship business using Spreadr — from installation to your first sale.", featured: true, emoji: "🛒" },
+  { title: "Price Drop Alerts: The Underused Retention Tool That Prints Money", date: "Apr 28, 2025", category: "Retention", app: "Watchlyst", excerpt: "Discover how automated price alerts can bring back customers who left empty-handed and turn them into loyal buyers.", emoji: "🔔" },
+  { title: "The Complete Guide to Bulk Pricing for Shopify Stores", date: "Apr 10, 2025", category: "Pricing", app: "Pro", excerpt: "Learn how to schedule discounts, run flash sales, and manage pricing across thousands of products effortlessly.", emoji: "💰" },
+  { title: "GST Invoicing for Shopify Merchants: Everything You Need to Know", date: "Mar 22, 2025", category: "Compliance", app: "Sleek", excerpt: "Navigate India's GST requirements with ease. Automate invoice generation and stay 100% compliant.", emoji: "📄" },
+  { title: "Do Product Badges Actually Increase Conversions? We Tested It.", date: "Mar 5, 2025", category: "Retention", app: "Prime", excerpt: "We ran a 3-month A/B test on product badges. The results? An 18% increase in conversion rates.", emoji: "🏷️" },
+  { title: "Amazon + Shopify: The Complete Multichannel Selling Playbook", date: "Feb 18, 2025", category: "Multichannel", app: "Connectr + Shipr", excerpt: "Everything you need to know about selling on both Amazon and Shopify simultaneously.", emoji: "🌐" },
 ];
 
 const Blog = () => {
+  const [filter, setFilter] = useState("All");
+  const filtered = filter === "All" ? posts : posts.filter(p => p.category === filter);
+
   return (
     <Layout>
-      <section className="section-container py-20">
-        <SectionHeading label="Blog" title="Insights & Resources" description="Tips, strategies, and updates from the Thalia Technologies team." />
+      {/* Hero */}
+      <section className="section-alt relative overflow-hidden" style={{ paddingTop: 80, paddingBottom: 60 }}>
+        <div className="section-container relative text-center">
+          <SectionHeading title="Insights for Commerce Builders" description="Deep dives, tutorials, and merchant success stories from the Thalia team." />
+        </div>
+      </section>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
-          {posts.map((post, i) => (
-            <motion.article
-              key={post.title}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: i * 0.08 }}
-              className="card-elevated p-6 cursor-pointer group"
-            >
-              <span className="text-xs font-medium text-primary bg-accent px-2 py-1 rounded-md">{post.category}</span>
-              <h3 className="font-heading font-bold text-foreground mt-4 mb-2 group-hover:text-primary transition-colors">{post.title}</h3>
-              <p className="text-sm text-muted-foreground leading-relaxed mb-4">{post.excerpt}</p>
-              <span className="text-xs text-muted-foreground">{post.date}</span>
-            </motion.article>
-          ))}
+      {/* Filter */}
+      <section style={{ paddingTop: 48 }}>
+        <div className="section-container">
+          <div className="flex flex-wrap gap-2 justify-center mb-10">
+            {categories.map((c) => (
+              <button key={c} onClick={() => setFilter(c)}
+                className={`px-5 py-2.5 rounded-lg text-sm font-bold font-heading transition-all ${
+                  filter === c ? "bg-primary text-primary-foreground" : "bg-background text-muted-foreground border border-border hover:border-primary"
+                }`}>
+                {c}
+              </button>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Featured */}
+      {filter === "All" && (
+        <section style={{ paddingBottom: 24 }}>
+          <div className="section-container">
+            <div className="card-elevated p-8 md:p-12 bg-secondary">
+              <span className="text-xs font-bold font-body text-primary uppercase tracking-[0.12em]">{posts[0].category}</span>
+              <h2 className="font-heading text-h3 font-bold text-foreground mt-3 mb-3">{posts[0].title}</h2>
+              <p className="text-muted-foreground font-body mb-4 max-w-2xl">{posts[0].excerpt}</p>
+              <div className="flex items-center gap-4">
+                <span className="text-sm text-muted-foreground font-body">{posts[0].date}</span>
+                <span className="text-sm font-bold text-primary font-body cursor-pointer">Read Article →</span>
+              </div>
+            </div>
+          </div>
+        </section>
+      )}
+
+      {/* Grid */}
+      <section style={{ paddingTop: 24, paddingBottom: 96 }}>
+        <div className="section-container">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {filtered.map((post, i) => (
+              <motion.article
+                key={post.title}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: i * 0.06 }}
+                className="card-elevated p-6 cursor-pointer group"
+              >
+                <div className="h-32 rounded-xl bg-secondary flex items-center justify-center text-5xl mb-4">
+                  {post.emoji}
+                </div>
+                <span className="text-xs font-bold text-primary bg-secondary px-2 py-1 rounded-md font-body">{post.category}</span>
+                <h3 className="font-heading font-bold text-foreground mt-3 mb-2 group-hover:text-primary transition-colors">{post.title}</h3>
+                <p className="text-sm text-muted-foreground leading-relaxed mb-4 font-body">{post.excerpt}</p>
+                <div className="flex items-center justify-between">
+                  <span className="text-xs text-muted-foreground font-body">{post.date}</span>
+                  <span className="text-sm font-bold text-primary font-body">Read →</span>
+                </div>
+              </motion.article>
+            ))}
+          </div>
         </div>
       </section>
     </Layout>
