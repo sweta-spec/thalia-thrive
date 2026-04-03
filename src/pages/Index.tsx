@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
-import { ArrowRight, Wrench, BarChart3, RefreshCcw, Handshake, Flame, Target, TrendingUp, ShieldCheck, Users } from "lucide-react";
+import { ArrowRight, Wrench, BarChart3, RefreshCcw, Handshake, Flame, Target } from "lucide-react";
 import Layout from "@/components/Layout";
 import SectionHeading from "@/components/SectionHeading";
 import AppCard from "@/components/AppCard";
