@@ -1,16 +1,22 @@
 import { Link } from "react-router-dom";
 import type { AppData } from "@/data/apps";
-import { getPlatformColor, getPlatformLabel } from "@/data/apps";
+import { getAppLogo, getPlatformColor, getPlatformLabel } from "@/data/apps";
 
 const AppCard = ({ app }: { app: AppData; index?: number }) => {
+  const logo = getAppLogo(app.slug);
+
   if (app.comingSoon) {
     return (
       <div className="card-elevated p-6 h-full relative opacity-60">
         <div className="absolute top-4 right-4 text-xs font-heading font-bold px-3 py-1 rounded-full bg-muted text-muted-foreground">
           Coming Soon
         </div>
-        <div className="w-12 h-12 rounded-[14px] flex items-center justify-center text-2xl mb-4" style={{ backgroundColor: `${app.color}18` }}>
-          {app.icon}
+        <div className="w-12 h-12 rounded-[14px] flex items-center justify-center text-2xl mb-4 overflow-hidden" style={{ backgroundColor: `${app.color}18` }}>
+          {logo ? (
+            <img src={logo} alt="" className="w-full h-full object-contain p-1" width={48} height={48} />
+          ) : (
+            <span>{app.icon}</span>
+          )}
         </div>
         <h3 className="font-heading font-bold text-lg mb-1 text-foreground">{app.name}</h3>
         <p className="text-sm font-body text-muted-foreground">{app.tagline}</p>
@@ -20,8 +26,12 @@ const AppCard = ({ app }: { app: AppData; index?: number }) => {
 
   return (
     <Link to={`/apps/${app.slug}`} className="block card-elevated p-6 h-full group">
-      <div className="w-12 h-12 rounded-[14px] flex items-center justify-center text-2xl mb-4" style={{ backgroundColor: `${app.color}18` }}>
-        {app.icon}
+      <div className="w-12 h-12 rounded-[14px] flex items-center justify-center text-2xl mb-4 overflow-hidden" style={{ backgroundColor: `${app.color}18` }}>
+        {logo ? (
+          <img src={logo} alt="" className="w-full h-full object-contain p-1" width={48} height={48} />
+        ) : (
+          <span>{app.icon}</span>
+        )}
       </div>
       <h3 className="font-heading font-bold text-lg mb-1 group-hover:text-primary transition-colors text-foreground">
         {app.name}

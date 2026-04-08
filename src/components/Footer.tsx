@@ -1,5 +1,16 @@
 import { Link } from "react-router-dom";
+import { Facebook, Instagram, Linkedin, Youtube, Store } from "lucide-react";
+import { XLogo } from "@/components/icons/XLogo";
 import logo from "@/assets/thalia-logo.jpg";
+
+const socialLinks = [
+  { href: "https://www.facebook.com/profile.php?id=61587990206911", label: "Facebook", Icon: Facebook },
+  { href: "https://www.instagram.com/thaliatechnologies/", label: "Instagram", Icon: Instagram },
+  { href: "https://www.linkedin.com/company/thalia-technologies/", label: "LinkedIn", Icon: Linkedin },
+  { href: "https://x.com/ThaliaT11897", label: "X", Icon: XLogo },
+  { href: "https://community.shopify.com/u/thalia_apps", label: "Shopify Community", Icon: Store },
+  { href: "https://www.youtube.com/@thaliatechnologies4745", label: "YouTube", Icon: Youtube },
+] as const;
 
 const Footer = () => {
   return (
@@ -14,6 +25,24 @@ const Footer = () => {
             <p className="text-sm leading-relaxed opacity-60">
               Software that Makes a Difference.
             </p>
+            <div
+              className="mt-5 grid grid-cols-3 gap-2 max-w-[8rem] sm:max-w-none sm:grid-cols-6"
+              role="list"
+            >
+              {socialLinks.map(({ href, label, Icon }) => (
+                <a
+                  key={label}
+                  href={href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  role="listitem"
+                  aria-label={label}
+                  className="inline-flex h-9 w-9 items-center justify-center rounded-lg text-primary-foreground opacity-65 hover:opacity-100 hover:bg-white/10 transition-all sm:h-10 sm:w-10"
+                >
+                  <Icon className="h-[18px] w-[18px] sm:h-5 sm:w-5" aria-hidden />
+                </a>
+              ))}
+            </div>
           </div>
 
           <div>
@@ -32,7 +61,6 @@ const Footer = () => {
             <div className="flex flex-col gap-2.5">
               <Link to="/about" className="text-sm opacity-65 hover:opacity-100 transition-opacity">About</Link>
               <Link to="/careers" className="text-sm opacity-65 hover:opacity-100 transition-opacity">Careers</Link>
-              <Link to="/blog" className="text-sm opacity-65 hover:opacity-100 transition-opacity">Blog</Link>
               <Link to="/contact" className="text-sm opacity-65 hover:opacity-100 transition-opacity">Contact</Link>
             </div>
           </div>
@@ -41,15 +69,28 @@ const Footer = () => {
             <h4 className="font-heading font-bold text-xs uppercase tracking-widest mb-4 opacity-40">Support</h4>
             <div className="flex flex-col gap-2.5">
               <Link to="/case-studies" className="text-sm opacity-65 hover:opacity-100 transition-opacity">Case Studies</Link>
-              <Link to="/features" className="text-sm opacity-65 hover:opacity-100 transition-opacity">Features</Link>
             </div>
           </div>
 
           <div>
             <h4 className="font-heading font-bold text-xs uppercase tracking-widest mb-4 opacity-40">Legal</h4>
             <div className="flex flex-col gap-2.5">
-              <span className="text-sm opacity-65">Privacy Policy</span>
-              <span className="text-sm opacity-65">Terms of Service</span>
+              <a
+                href="https://thaliaapps.freshdesk.com/support/solutions/articles/29000038536-privacy-policy"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-sm opacity-65 hover:opacity-100 transition-opacity"
+              >
+                Privacy Policy
+              </a>
+              <a
+                href="https://thaliaapps.freshdesk.com/support/solutions/articles/29000047456-terms-of-use"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-sm opacity-65 hover:opacity-100 transition-opacity"
+              >
+                Terms of Service
+              </a>
             </div>
           </div>
         </div>

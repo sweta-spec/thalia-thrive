@@ -3,8 +3,10 @@ import { Link } from "react-router-dom";
 import { ArrowRight, Building, Rocket, Brain, Heart, GraduationCap, HeartPulse, Plane, Coffee, Gift, Clock } from "lucide-react";
 import Layout from "@/components/Layout";
 import SectionHeading from "@/components/SectionHeading";
-import { Button } from "@/components/ui/button";
 import careersImg from "@/assets/careers-workspace.jpg";
+
+/** External careers / job listings (opens in new tab from Apply CTAs). */
+const JOB_LISTINGS_URL = "https://wellfound.com/company/thalia-technologies-1";
 
 const perks = [
   { icon: Building, title: "Hybrid & Flexible", desc: "We work in a hybrid model with flexible hours. Work from office or home — whatever helps you do your best work." },
@@ -102,14 +104,19 @@ const Careers = () => {
           <div className="max-w-3xl mx-auto space-y-4">
             {openings.map((job, i) => (
               <motion.div key={job.title} initial={{ opacity: 0, y: 12 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.08 }}
-                className="card-elevated p-5 flex items-center justify-between gap-4">
+                className="card-elevated p-5 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
                 <div>
                   <h4 className="font-heading font-bold text-foreground">{job.title}</h4>
                   <p className="text-sm text-muted-foreground font-body">{job.dept} · {job.type} · {job.location}</p>
                 </div>
-                <Button size="sm" className="bg-primary text-primary-foreground hover:bg-primary-dark rounded-lg font-heading font-bold">
+                <a
+                  href={JOB_LISTINGS_URL}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center justify-center shrink-0 h-9 px-4 rounded-lg bg-primary text-primary-foreground hover:bg-primary-dark text-sm font-heading font-bold transition-colors"
+                >
                   Apply Now <ArrowRight className="ml-1.5 h-3 w-3" />
-                </Button>
+                </a>
               </motion.div>
             ))}
           </div>

@@ -1,11 +1,16 @@
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
-import { ArrowRight, Heart, Target, Lightbulb, Users, Globe, Palette, Linkedin, Twitter } from "lucide-react";
+import { ArrowRight, Heart, Target, Lightbulb, Users, Globe, Palette, Linkedin } from "lucide-react";
 import Layout from "@/components/Layout";
 import SectionHeading from "@/components/SectionHeading";
-import aboutImg from "@/assets/about-workspace.jpg";
-import missionImg from "@/assets/mission-illustration.jpg";
-import teamImg from "@/assets/team-photo.jpg";
+import aboutImg from "@/assets/About us.png";
+import whyWeExistImg from "@/assets/Why we exist.jpg";
+import workingCultureImg from "@/assets/Working Culture.jpg";
+import pawanMorePhoto from "@/assets/Pawan More.jpg";
+import aniketRanePhoto from "@/assets/Aniket Rane.jpg";
+import ankitManePhoto from "@/assets/Ankit Mane.png";
+import ankitKothariPhoto from "@/assets/Ankit Kothari.jpg";
+import tejasSangoiPhoto from "@/assets/Tejas Sangoi.jpg";
 
 const values = [
   { icon: Lightbulb, title: "Innovation First", desc: "We explore new ways to solve commerce problems. Innovation isn't a buzzword — it's how we operate every day." },
@@ -17,11 +22,11 @@ const values = [
 ];
 
 const teamMembers = [
-  { name: "Tejas Sangoi", role: "Founder & CEO", bio: "Tejas founded Thalia Technologies with a vision to solve real ecommerce problems with elegant software. He leads product vision and company strategy, driving the team to build products that truly make a difference.", initials: "TS" },
-  { name: "Pawan More", role: "Senior Software Engineer", bio: "Pawan leads core engineering across Thalia's product suite. He's passionate about building scalable, reliable systems and ensuring every product meets the highest standards of code quality.", initials: "PM" },
-  { name: "Ankit Kothari", role: "Customer Support Specialist", bio: "Ankit ensures every merchant gets the help they need. He's the voice of the customer inside Thalia, translating feedback into product improvements.", initials: "AK" },
-  { name: "Aniket Rane", role: "Software Engineer", bio: "Aniket builds and maintains key features across Thalia's apps. He's dedicated to writing clean, efficient code and delivering seamless user experiences.", initials: "AR" },
-  { name: "Ankit Mane", role: "Application Support Specialist", bio: "Ankit Mane provides expert application support, helping merchants troubleshoot issues and get the most out of Thalia's products.", initials: "AM" },
+  { name: "Tejas Sangoi", role: "Founder & CEO", bio: "Tejas founded Thalia Technologies with a vision to solve real ecommerce problems with elegant software. He leads product vision and company strategy, driving the team to build products that truly make a difference.", initials: "TS", linkedinUrl: "https://www.linkedin.com/in/sangoitejas/", photo: tejasSangoiPhoto },
+  { name: "Pawan More", role: "Tech Lead", bio: "Pawan leads core engineering across Thalia's product suite. He's passionate about building scalable, reliable systems and ensuring every product meets the highest standards of code quality.", initials: "PM", linkedinUrl: "https://www.linkedin.com/in/pawan-more/", photo: pawanMorePhoto },
+  { name: "Ankit Kothari", role: "Product Manager", bio: "Ankit ensures every merchant gets the help they need. He's the voice of the customer inside Thalia, translating feedback into product improvements.", initials: "AK", linkedinUrl: "https://www.linkedin.com/in/ankit-kothari93/", photo: ankitKothariPhoto },
+  { name: "Aniket Rane", role: "Lead Software Engineer", bio: "Aniket builds and maintains key features across Thalia's apps. He's dedicated to writing clean, efficient code and delivering seamless user experiences.", initials: "AR", linkedinUrl: "https://www.linkedin.com/in/aniketrane/", photo: aniketRanePhoto },
+  { name: "Ankit Mane", role: "Support Lead", bio: "Ankit Mane provides expert application support, helping merchants troubleshoot issues and get the most out of Thalia's products.", initials: "AM", linkedinUrl: "https://www.linkedin.com/in/ankit-mane-1880aa146/", photo: ankitManePhoto },
 ];
 
 const milestones = [
@@ -37,8 +42,7 @@ const About = () => {
   return (
     <Layout>
       {/* Hero */}
-      <section className="relative overflow-hidden" style={{ paddingTop: 80, paddingBottom: 80 }}>
-        <div className="absolute inset-0 pointer-events-none" style={{ background: "radial-gradient(ellipse 60% 50% at 50% 0%, hsla(231,91%,64%,0.06) 0%, transparent 70%)" }} />
+      <section className="relative overflow-hidden bg-background" style={{ paddingTop: 80, paddingBottom: 80 }}>
         <div className="section-container relative">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <div>
@@ -56,7 +60,7 @@ const About = () => {
               </motion.div>
             </div>
             <motion.div initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 0.2 }}>
-              <img src={aboutImg} alt="Professional workspace with SaaS dashboard and analytics" className="w-full rounded-2xl" width={800} height={600} />
+              <img src={aboutImg} alt="Thalia Technologies — about us" className="w-full rounded-2xl object-cover shadow-sm" width={800} height={600} />
             </motion.div>
           </div>
         </div>
@@ -84,11 +88,11 @@ const About = () => {
       </section>
 
       {/* Mission - Redesigned */}
-      <section style={{ paddingTop: 96, paddingBottom: 96 }}>
+      <section className="bg-background" style={{ paddingTop: 96, paddingBottom: 96 }}>
         <div className="section-container">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <motion.div initial={{ opacity: 0, x: -20 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }}>
-              <img src={missionImg} alt="Company mission illustration showing growth, direction and global ecommerce impact" className="w-full rounded-2xl" loading="lazy" width={1200} height={600} />
+              <img src={whyWeExistImg} alt="Why Thalia exists — our mission" className="w-full rounded-2xl object-cover shadow-sm" loading="lazy" width={1200} height={800} />
             </motion.div>
             <div>
               <span className="inline-block text-xs font-semibold uppercase tracking-[0.12em] text-primary mb-4 font-body">OUR MISSION</span>
@@ -128,22 +132,42 @@ const About = () => {
       </section>
 
       {/* Team Section */}
-      <section style={{ paddingTop: 96, paddingBottom: 96 }}>
+      <section className="bg-background" style={{ paddingTop: 96, paddingBottom: 96 }}>
         <div className="section-container">
           <SectionHeading label="OUR TEAM" title="Meet the People Behind Thalia" description="A lean, talented team of builders who are passionate about creating software that makes a difference." />
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {teamMembers.map((member, i) => (
               <motion.div key={member.name} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.08 }}
                 className="card-elevated p-6 text-center group">
-                <div className="w-20 h-20 rounded-full bg-primary flex items-center justify-center mx-auto mb-4 font-heading font-bold text-xl text-primary-foreground group-hover:scale-110 transition-transform">
-                  {member.initials}
+                <div className="mx-auto mb-4 h-24 w-24 shrink-0 overflow-hidden rounded-full bg-primary ring-2 ring-primary/20 shadow-sm transition-transform group-hover:scale-[1.03]">
+                  {"photo" in member && member.photo ? (
+                    <img
+                      src={member.photo}
+                      alt={member.name}
+                      className="h-full w-full object-cover object-center"
+                      loading="lazy"
+                      width={96}
+                      height={96}
+                    />
+                  ) : (
+                    <div className="flex h-full w-full items-center justify-center font-heading text-xl font-bold text-primary-foreground">
+                      {member.initials}
+                    </div>
+                  )}
                 </div>
                 <h3 className="font-heading font-bold text-lg text-foreground">{member.name}</h3>
                 <p className="text-sm text-primary font-heading font-bold mb-3">{member.role}</p>
                 <p className="text-xs text-muted-foreground font-body leading-relaxed">{member.bio}</p>
-                <div className="flex gap-3 justify-center mt-4">
-                  <a href="#" className="text-muted-foreground hover:text-primary transition-colors"><Linkedin className="h-4 w-4" /></a>
-                  <a href="#" className="text-muted-foreground hover:text-primary transition-colors"><Twitter className="h-4 w-4" /></a>
+                <div className="flex justify-center mt-4">
+                  <a
+                    href={member.linkedinUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-muted-foreground hover:text-primary transition-colors"
+                    aria-label={`${member.name} on LinkedIn`}
+                  >
+                    <Linkedin className="h-4 w-4" />
+                  </a>
                 </div>
               </motion.div>
             ))}
@@ -151,12 +175,24 @@ const About = () => {
         </div>
       </section>
 
-      {/* A Small Team. A Big Impact. - No map, text only */}
-      <section className="section-alt" style={{ paddingTop: 96, paddingBottom: 96 }}>
+      {/* A Small Team. Big Impact. */}
+      <section className="bg-background" style={{ paddingTop: 96, paddingBottom: 96 }}>
         <div className="section-container">
-          <div className="grid lg:grid-cols-2 gap-12 items-center">
-            <motion.div initial={{ opacity: 0, x: -20 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }}>
-              <img src={teamImg} alt="Thalia Technologies team collaborating" className="w-full rounded-2xl" loading="lazy" width={800} height={600} />
+          <div className="grid gap-10 lg:grid-cols-2 lg:gap-12 lg:items-center">
+            <motion.div
+              initial={{ opacity: 0, x: -16 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              className="overflow-hidden rounded-2xl shadow-sm ring-1 ring-border/30"
+            >
+              <img
+                src={workingCultureImg}
+                alt="Thalia team — working culture"
+                className="aspect-[4/3] w-full object-cover object-center sm:aspect-[5/4] lg:min-h-[20rem] lg:max-h-[32rem]"
+                loading="lazy"
+                width={1200}
+                height={900}
+              />
             </motion.div>
             <div>
               <h2 className="font-heading text-h2 font-bold text-foreground mb-6">A Small Team. A Big Impact.</h2>

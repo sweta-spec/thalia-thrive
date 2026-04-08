@@ -7,9 +7,7 @@ import Index from "./pages/Index";
 import About from "./pages/About";
 import Apps from "./pages/Apps";
 import AppDetail from "./pages/AppDetail";
-import Features from "./pages/Features";
 import Contact from "./pages/Contact";
-import Blog from "./pages/Blog";
 import Careers from "./pages/Careers";
 import CaseStudies from "./pages/CaseStudies";
 import NotFound from "./pages/NotFound";
@@ -27,9 +25,7 @@ const App = () => (
           <Route path="/about" element={<About />} />
           <Route path="/apps" element={<Apps />} />
           <Route path="/apps/:slug" element={<AppDetail />} />
-          <Route path="/features" element={<Features />} />
           <Route path="/contact" element={<Contact />} />
-          <Route path="/blog" element={<Blog />} />
           <Route path="/careers" element={<Careers />} />
           <Route path="/case-studies" element={<CaseStudies />} />
           <Route path="*" element={<NotFound />} />

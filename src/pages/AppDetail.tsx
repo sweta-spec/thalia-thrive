@@ -2,7 +2,20 @@ import { useParams, Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import Layout from "@/components/Layout";
 import AppCard from "@/components/AppCard";
-import { apps, getPlatformColor, getPlatformLabel, getAppImage } from "@/data/apps";
+import type { AppData } from "@/data/apps";
+import { apps, getPlatformColor, getPlatformLabel, getAppImage, getAppLogo } from "@/data/apps";
+
+const getPrimaryCtaLabel = (app: AppData) => {
+  if (app.platform === "BigCommerce") return "Install on BigCommerce";
+  if (app.platform === "API") return "Visit website";
+  return "Install on Shopify";
+};
+
+const getWebsiteUrl = (app: AppData): string | undefined => {
+  if (app.slug === "spreadr") return "https://spreadr.co/";
+  if (app.slug === "csvbox") return "https://csvbox.io/";
+  return undefined;
+};
 import NotFound from "./NotFound";
 import { useState } from "react";
 import { ArrowRight, Check, Star } from "lucide-react";
@@ -16,8 +29,24 @@ const AppDetail = () => {
 
   const relatedApps = apps.filter(a => a.slug !== app.slug && a.platform === app.platform && !a.comingSoon).slice(0, 3);
   const platformColor = getPlatformColor(app.platform);
-  const installLabel = app.platform.includes("Shopify") ? "Shopify" : app.platform.includes("Amazon") ? "Shopify" : app.platform;
+  const appLogo = getAppLogo(app.slug);
+  const websiteUrl = getWebsiteUrl(app);
+  const showWebsiteSecondary = Boolean(websiteUrl && app.slug !== "csvbox");
   const appImage = getAppImage(app.slug);
+  const primaryCtaLabel = getPrimaryCtaLabel(app);
+  const primaryCtaClass = primaryCtaLabel === "Install on Shopify" ? "btn-shopify" : "btn-primary";
+  const appPageName =
+    app.slug === "duplicate"
+      ? "Duplicate SKU Sync Master"
+      : app.slug === "clever"
+        ? "Clever Variant Images"
+        : app.slug === "clean"
+          ? "Clean Info Tables & Charts"
+          : app.slug === "prime"
+            ? "Prime Product Badges Stickers"
+            : app.slug === "csvbox"
+              ? "CSV Box"
+        : app.name;
 
   return (
     <Layout>
@@ -28,7 +57,7 @@ const AppDetail = () => {
           <span className="mx-2">›</span>
           <Link to="/apps" className="hover:text-primary transition-colors">Apps</Link>
           <span className="mx-2">›</span>
-          <span className="text-foreground">{app.name}</span>
+          <span className="text-foreground">{appPageName}</span>
         </nav>
       </div>
 
@@ -44,7 +73,7 @@ const AppDetail = () => {
                 style={{ backgroundColor: `${platformColor}14`, color: platformColor }}>
                 {getPlatformLabel(app.platform)}
               </span>
-              <h1 className="font-heading text-h1 font-extrabold text-foreground mb-4">{app.name}</h1>
+              <h1 className="font-heading text-h1 font-extrabold text-foreground mb-4">{appPageName}</h1>
               <p className="font-body text-lg leading-relaxed mb-4 text-muted-foreground">{app.description}</p>
               <p className="font-body text-sm leading-relaxed mb-8 text-muted-foreground">{app.longDescription}</p>
 
@@ -58,11 +87,19 @@ const AppDetail = () => {
                 <>
                   <div className="flex flex-col sm:flex-row gap-3 mb-6">
                     {app.externalUrl !== "#" && (
-                      <a href={app.externalUrl} target="_blank" rel="noopener noreferrer" className="btn-primary text-base px-8 py-4">
-                        Install Free <ArrowRight className="ml-2 h-4 w-4 inline" />
+                      <a href={app.externalUrl} target="_blank" rel="noopener noreferrer" className={`${primaryCtaClass} text-base px-8 py-4`}>
+                        {primaryCtaLabel} <ArrowRight className="ml-2 h-4 w-4 inline" />
                       </a>
                     )}
-                    <Link to="/contact" className="btn-outline text-base px-8 py-4">Contact Sales</Link>
+                    {showWebsiteSecondary ? (
+                      <a href={websiteUrl} target="_blank" rel="noopener noreferrer" className="btn-outline text-base px-8 py-4">
+                        View website
+                      </a>
+                    ) : (
+                      app.slug !== "csvbox" && (
+                        <Link to="/contact" className="btn-outline text-base px-8 py-4">Contact Sales</Link>
+                      )
+                    )}
                   </div>
                   <div className="flex items-center gap-4 text-sm font-body text-muted-foreground">
                     <span className="flex items-center gap-1">
@@ -77,9 +114,20 @@ const AppDetail = () => {
             </motion.div>
 
             <motion.div initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} transition={{ delay: 0.2 }}
-              className="flex items-center justify-center">
+              className="flex items-center justify-center lg:justify-end">
               {appImage ? (
-                <img src={appImage} alt={`${app.name} — ${app.tagline}`} className="w-full max-w-lg rounded-2xl shadow-lg" loading="lazy" width={800} height={600} />
+                <div className="w-full max-w-xl overflow-hidden rounded-2xl border border-border/50 bg-muted/30 shadow-xl ring-1 ring-black/[0.04] dark:ring-white/10">
+                  <img
+                    src={appImage}
+                    alt={`${appPageName} — ${app.tagline}`}
+                    className="w-full h-auto max-h-[min(28rem,72vh)] object-contain object-top"
+                    loading="lazy"
+                    width={960}
+                    height={640}
+                  />
+                </div>
+              ) : appLogo ? (
+                <img src={appLogo} alt={`${appPageName} logo`} className="w-full max-w-md max-h-80 object-contain rounded-2xl" loading="lazy" width={512} height={320} />
               ) : (
                 <div className="w-full max-w-md aspect-square rounded-3xl flex items-center justify-center"
                   style={{ background: `${app.color}10`, boxShadow: `0 20px 60px ${app.color}20` }}>
@@ -98,7 +146,7 @@ const AppDetail = () => {
             <section className="section-alt" style={{ paddingTop: 96, paddingBottom: 96 }}>
               <div className="section-container">
                 <div className="text-center mb-12">
-                  <span className="inline-block font-heading font-bold text-xs uppercase tracking-[0.12em] mb-3 text-primary">WHY CHOOSE {app.name.toUpperCase()}</span>
+                  <span className="inline-block font-heading font-bold text-xs uppercase tracking-[0.12em] mb-3 text-primary">WHY CHOOSE {appPageName.toUpperCase()}</span>
                   <h2 className="font-heading font-extrabold text-h2 text-foreground">Key Benefits</h2>
                 </div>
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 max-w-4xl mx-auto">
@@ -189,24 +237,42 @@ const AppDetail = () => {
                   <h2 className="font-heading font-extrabold text-h2 text-foreground">Simple, Transparent Pricing</h2>
                   <p className="text-muted-foreground font-body mt-3">Start free. Upgrade as you grow. No hidden fees.</p>
                 </div>
-                <div className={`grid grid-cols-1 md:grid-cols-${Math.min(app.plans.length, 3)} gap-6 max-w-4xl mx-auto`}>
+                <div
+                  className={`grid grid-cols-1 gap-6 mx-auto ${
+                    app.plans.length === 5
+                      ? "md:grid-cols-2 lg:grid-cols-5 max-w-[96rem]"
+                      : app.plans.length >= 4
+                      ? "md:grid-cols-2 lg:grid-cols-4 max-w-7xl"
+                      : app.plans.length === 3
+                        ? "md:grid-cols-3 max-w-6xl"
+                        : app.plans.length === 2
+                          ? "md:grid-cols-2 max-w-4xl"
+                          : "max-w-2xl"
+                  }`}
+                >
                   {app.plans.map((plan, i) => (
                     <motion.div key={plan.name} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.1 }}
-                      className={`card-elevated p-8 text-center relative ${plan.highlighted ? 'ring-2 ring-primary' : ''}`}>
+                      className={`card-elevated p-8 relative h-full flex flex-col ${plan.highlighted ? 'ring-2 ring-primary' : ''}`}>
                       {plan.highlighted && (
                         <span className="absolute -top-3 left-1/2 -translate-x-1/2 bg-primary text-primary-foreground text-xs font-bold font-heading px-4 py-1 rounded-full">
                           Most Popular
                         </span>
                       )}
-                      <h3 className="font-heading font-bold text-lg text-foreground mb-2">{plan.name}</h3>
-                      <div className="mb-6">
+                      <h3 className="font-heading font-bold text-lg text-foreground mb-2 text-center">{plan.name}</h3>
+                      <div className="mb-6 text-center">
                         <span className="font-heading font-extrabold text-4xl text-foreground">{plan.price}</span>
-                        <span className="text-muted-foreground font-body text-sm">{plan.period}</span>
+                        {plan.period && <span className="text-muted-foreground font-body text-sm">{plan.period}</span>}
+                        {plan.note && (
+                          <div className="mt-2 text-[10px] tracking-[0.08em] uppercase text-muted-foreground font-heading font-semibold">
+                            {plan.note}
+                          </div>
+                        )}
                       </div>
-                      <ul className="space-y-3 mb-8">
+                      <ul className="space-y-3 mb-8 flex-1">
                         {plan.features.map((f, j) => (
-                          <li key={j} className="flex items-center gap-2 text-sm font-body text-muted-foreground">
-                            <Check className="h-4 w-4 text-primary flex-shrink-0" />{f}
+                          <li key={j} className="flex items-start gap-2 text-sm font-body text-muted-foreground text-left leading-relaxed">
+                            <Check className="h-4 w-4 text-primary flex-shrink-0 mt-0.5" />
+                            <span>{f}</span>
                           </li>
                         ))}
                       </ul>
@@ -273,12 +339,12 @@ const AppDetail = () => {
           {/* Install CTA */}
           <section style={{ background: "linear-gradient(135deg, hsl(var(--primary)), hsl(var(--accent)))", paddingTop: 80, paddingBottom: 80 }}>
             <div className="section-container text-center">
-              <h2 className="font-heading font-extrabold text-3xl text-primary-foreground mb-4">Ready to Try {app.name}?</h2>
+              <h2 className="font-heading font-extrabold text-3xl text-primary-foreground mb-4">Ready to Try {appPageName}?</h2>
               <p className="font-body text-lg mb-8 text-primary-foreground/80">Free to install. No credit card required.</p>
               {app.externalUrl !== "#" && (
                 <a href={app.externalUrl} target="_blank" rel="noopener noreferrer"
-                  className="inline-flex items-center justify-center font-heading font-bold text-sm px-8 py-4 rounded-lg bg-background text-primary transition-all hover:scale-102">
-                  Install Free on {installLabel} <ArrowRight className="ml-2 h-4 w-4" />
+                  className={`${primaryCtaLabel === "Install on Shopify" ? "btn-shopify" : "inline-flex items-center justify-center font-heading font-bold text-sm px-8 py-4 rounded-lg bg-background text-primary transition-all hover:scale-102"}`}>
+                  {primaryCtaLabel} <ArrowRight className="ml-2 h-4 w-4" />
                 </a>
               )}
             </div>

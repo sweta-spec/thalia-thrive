@@ -3,7 +3,7 @@ import Layout from "@/components/Layout";
 import SectionHeading from "@/components/SectionHeading";
 import AppCard from "@/components/AppCard";
 import { apps } from "@/data/apps";
-import appsImg from "@/assets/apps-showcase.jpg";
+import appsImg from "@/assets/Ecommerce apps.jpg";
 
 const Apps = () => {
   return (
@@ -20,7 +20,7 @@ const Apps = () => {
               <SectionHeading center={false} title="Every App. One Mission." description="We build focused, powerful tools for ecommerce merchants. No bloat, no noise — just software that works." />
             </div>
             <motion.div initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 0.2 }}>
-              <img src={appsImg} alt="Showcase of ecommerce SaaS product interfaces and dashboards" className="w-full rounded-2xl" width={1200} height={600} />
+              <img src={appsImg} alt="Ecommerce apps — product showcase" className="w-full rounded-2xl object-cover shadow-sm" width={1200} height={600} />
             </motion.div>
           </div>
         </div>

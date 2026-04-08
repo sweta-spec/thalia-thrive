@@ -5,10 +5,16 @@ import Layout from "@/components/Layout";
 import SectionHeading from "@/components/SectionHeading";
 import AppCard from "@/components/AppCard";
 import { apps } from "@/data/apps";
-import heroImg from "@/assets/hero-dashboard.jpg";
+import heroImg from "@/assets/hero-dashboard (2).jpg";
 import ecommerceImg from "@/assets/ecommerce-tools.jpg";
 import valuesImg from "@/assets/values-illustration.jpg";
 import statsBg from "@/assets/stats-bg.jpg";
+import shopifyLogo from "@/assets/shopify_logo_black.png";
+import wixLogo from "@/assets/wix logo.png";
+import wordpressLogo from "@/assets/Wordpress_logo-removebg-preview.png";
+import bigCommerceLogo from "@/assets/icons8-bigcommerce-48.png";
+import shopifyPlusLogo from "@/assets/shopify-plus-seeklogo.png";
+import amazonLogo from "@/assets/Amazon_logo-removebg-preview.png";
 
 const stats = [
   { value: "100K+", label: "Merchants Trust Us" },
@@ -33,6 +39,15 @@ const testimonials = [
   { quote: "Spreadr transformed our business. We went from zero to dropshipping 10,000+ Amazon products in just one week.", author: "James M.", role: "Shopify Merchant, USA", rating: 5 },
   { quote: "Watchlyst brought back over 200 lost customers in the first month alone. The ROI is incredible.", author: "Sarah L.", role: "eCommerce Owner, UK", rating: 5 },
   { quote: "Pro Bulk Editor saved us 20+ hours per week. Scheduling discounts is now completely automated.", author: "Raj K.", role: "Shopify Plus Merchant, India", rating: 5 },
+];
+
+const platformLogos = [
+  { src: shopifyLogo, alt: "Shopify logo" },
+  { src: bigCommerceLogo, alt: "BigCommerce logo" },
+  { src: amazonLogo, alt: "Amazon logo" },
+  { src: shopifyPlusLogo, alt: "Shopify Plus logo" },
+  { src: wixLogo, alt: "Wix logo" },
+  { src: wordpressLogo, alt: "WordPress logo" },
 ];
 
 const fadeUp = (delay = 0) => ({
@@ -74,7 +89,7 @@ const Index = () => {
               </motion.div>
             </div>
             <motion.div {...fadeUp(0.2)}>
-              <img src={heroImg} alt="SaaS dashboard illustration showing ecommerce analytics and product management" className="w-full rounded-2xl" width={1200} height={800} />
+              <img src={heroImg} alt="Thalia — ecommerce software for growing businesses" className="w-full rounded-3xl object-cover shadow-sm" width={1200} height={800} />
             </motion.div>
           </div>
         </div>
@@ -84,11 +99,22 @@ const Index = () => {
       <section className="section-alt py-12">
         <div className="section-container text-center">
           <p className="text-sm font-body text-muted-foreground mb-6">Powering businesses on the world's top ecommerce platforms</p>
-          <div className="flex justify-center items-center gap-12 flex-wrap opacity-50">
-            <span className="font-heading font-bold text-xl text-foreground">Shopify</span>
-            <span className="font-heading font-bold text-xl text-foreground">Amazon</span>
-            <span className="font-heading font-bold text-xl text-foreground">BigCommerce</span>
-            <span className="font-heading font-bold text-xl text-foreground">Shopify Plus</span>
+          <div className="mx-auto flex w-full max-w-6xl flex-col items-center justify-center opacity-95">
+            <div className="flex w-full max-w-full flex-nowrap items-center justify-center gap-6 overflow-x-auto px-4 py-2 sm:gap-8 md:gap-10 [-webkit-overflow-scrolling:touch]">
+              {platformLogos.map((logo) => (
+                <div
+                  key={logo.alt}
+                  className="flex h-11 shrink-0 flex-col items-center justify-center sm:h-12 md:h-14"
+                >
+                  <img
+                    src={logo.src}
+                    alt={logo.alt}
+                    className="mx-auto block max-h-full w-auto max-w-[min(28vw,9rem)] object-contain object-center drop-shadow-sm"
+                    loading="lazy"
+                  />
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       </section>
@@ -141,15 +167,15 @@ const Index = () => {
       <section className="relative" style={{ paddingTop: 80, paddingBottom: 80 }}>
         <div className="absolute inset-0">
           <img src={statsBg} alt="" className="w-full h-full object-cover" />
-          <div className="absolute inset-0 bg-foreground/80" />
+          <div className="absolute inset-0 bg-foreground/70" />
         </div>
         <div className="section-container relative">
           <h2 className="font-heading text-h2 font-extrabold text-primary-foreground text-center mb-12">The Numbers Speak for Themselves</h2>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
             {stats.map((stat, i) => (
               <motion.div key={stat.label} initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.1 }} className="text-center">
-                <div className="font-heading text-h1 font-extrabold text-primary mb-1">{stat.value}</div>
-                <div className="text-sm text-primary-foreground opacity-70 font-body">{stat.label}</div>
+                <div className="font-heading text-h1 font-extrabold text-primary-foreground mb-1 drop-shadow-sm">{stat.value}</div>
+                <div className="text-sm text-primary-foreground/80 font-body">{stat.label}</div>
               </motion.div>
             ))}
           </div>
@@ -228,7 +254,7 @@ const Index = () => {
           <SectionHeading title="Let's Talk" description="Have a question, a partnership idea, or just want to say hello? We'd love to hear from you." />
           <div className="flex flex-wrap gap-3 justify-center">
             <Link to="/contact" className="btn-primary text-sm">Get in Touch <ArrowRight className="ml-2 h-4 w-4 inline" /></Link>
-            <a href="mailto:hello@thaliatechnologies.com" className="btn-outline text-sm">hello@thaliatechnologies.com</a>
+            <a href="mailto:supportteam@thaliatechnologies.com" className="btn-outline text-sm">supportteam@thaliatechnologies.com</a>
           </div>
         </div>
       </section>

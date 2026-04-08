@@ -2,6 +2,7 @@ export interface AppPlan {
   name: string;
   price: string;
   period: string;
+  note?: string;
   features: string[];
   highlighted?: boolean;
 }
@@ -13,6 +14,28 @@ export interface AppReview {
   role: string;
   date: string;
 }
+
+import spreadrLogo from "@/assets/Spreadr Logo.webp";
+import watchlystLogo from "@/assets/watchlyst logo.webp";
+import connectrLogo from "@/assets/Amazon Connectr.webp";
+import boltLogo from "@/assets/bolt logo.webp";
+import dualLogo from "@/assets/Dual logo.webp";
+import outlinkLogo from "@/assets/Outlink Logo.webp";
+import roboLogo from "@/assets/Robo.webp";
+import t2IconsLogo from "@/assets/T2 Icons.webp";
+import shiprLogo from "@/assets/Shipr.webp";
+import duplicateLogo from "@/assets/Duplicate.webp";
+import sleekLogo from "@/assets/sleek.png";
+import cleverLogo from "@/assets/Clever.webp";
+import superLogo from "@/assets/Super.png";
+import cleanTableLogo from "@/assets/Clean Table.webp";
+import primeLogo from "@/assets/Prime.webp";
+import proBulkPriceEditorLogo from "@/assets/Pro Bulk Price Editor.webp";
+import csvBoxLogo from "@/assets/CSV Box.png";
+import fyleboxLogo from "@/assets/fylebox-logo.png";
+import roboWebsiteHero from "@/assets/Robo website Image.png";
+import proBulkWebsiteHero from "@/assets/Pro Bulk Price Editor website.png";
+import t2WebsiteHero from "@/assets/app-t2.jpg";
 
 export interface AppData {
   slug: string;
@@ -45,7 +68,35 @@ try {
   }
 } catch (e) { /* ignore */ }
 
+/** Website / product screenshots for app detail hero (JPGs from glob; PNGs below). */
+appImages.robo = roboWebsiteHero;
+appImages.probulkpriceeditor = proBulkWebsiteHero;
+appImages.t2icons = t2WebsiteHero;
+
 export const getAppImage = (slug: string): string | undefined => appImages[slug];
+
+const appLogos: Record<string, string> = {
+  spreadr: spreadrLogo,
+  watchlyst: watchlystLogo,
+  connectr: connectrLogo,
+  bolt: boltLogo,
+  dual: dualLogo,
+  outlink: outlinkLogo,
+  robo: roboLogo,
+  t2icons: t2IconsLogo,
+  shipr: shiprLogo,
+  duplicate: duplicateLogo,
+  sleek: sleekLogo,
+  clever: cleverLogo,
+  super: superLogo,
+  clean: cleanTableLogo,
+  prime: primeLogo,
+  probulkpriceeditor: proBulkPriceEditorLogo,
+  csvbox: csvBoxLogo,
+  fylebox: fyleboxLogo,
+};
+
+export const getAppLogo = (slug: string): string | undefined => appLogos[slug];
 
 export const apps: AppData[] = [
   {
@@ -78,9 +129,58 @@ export const apps: AppData[] = [
       { step: "03", title: "Earn & Grow", desc: "Customers browse your store and click through to Amazon. You earn commissions on every sale. Scale by importing more products." },
     ],
     plans: [
-      { name: "Free", price: "$0", period: "/month", features: ["Up to 25 products", "Basic sync", "Affiliate links", "Email support"] },
-      { name: "Growth", price: "$5.99", period: "/month", features: ["Up to 500 products", "Hourly sync", "Bulk import", "Priority support"], highlighted: true },
-      { name: "Pro", price: "$9.99", period: "/month", features: ["Unlimited products", "Real-time sync", "Auto-import scheduling", "Dedicated support"] },
+      {
+        name: "Basic",
+        price: "$5",
+        period: "/month",
+        features: [
+          "Unlimited product imports.",
+          "Amazon Button Link.",
+          "Markup Pricing.",
+          "Auto-fill Product Type, Vendor, Tags.",
+          "Description attribute selection.",
+          "Support All Amazon Regions.",
+        ],
+      },
+      {
+        name: "Pro",
+        price: "$10",
+        period: "/month",
+        features: [
+          "Unlimited product imports.",
+          "Auto-sync upto 1,000 products.",
+          "Geo-localize.",
+          "Analytics.",
+          "Chrome Extension.",
+          "All features from Basic plan.",
+        ],
+        highlighted: true,
+      },
+      {
+        name: "Gold",
+        price: "$20",
+        period: "/month",
+        features: [
+          "Unlimited product imports.",
+          "Auto-sync upto 3,000 products.",
+          "Geo-localize.",
+          "Analytics.",
+          "Chrome Extension.",
+          "Manual-sync.",
+          "Bulk actions.",
+        ],
+      },
+      {
+        name: "Higher",
+        price: "$35",
+        period: "/month",
+        features: [
+          "Super $35 Auto-sync upto 10,000 products.",
+          "Jumbo $35 Auto-sync upto 50,000 products.",
+          "Custom Auto-sync upto unlimited products.",
+          "All features from Gold plan.",
+        ],
+      },
     ],
     reviews: [
       { rating: 5, quote: "Spreadr transformed our business. We went from zero to dropshipping 10,000+ Amazon products in just one week.", author: "James M.", role: "Shopify Merchant, USA", date: "Mar 2025" },
@@ -92,6 +192,84 @@ export const apps: AppData[] = [
     icon: "🔗",
     stats: [{ value: "50K+", label: "Installs" }, { value: "4.9★", label: "Rating" }, { value: "2M+", label: "Products Imported" }],
     testimonial: { quote: "Spreadr transformed our business. We went from zero to dropshipping 10,000+ Amazon products in just one week.", author: "James M.", role: "Shopify Merchant, USA" },
+  },
+  {
+    slug: "probulkpriceeditor",
+    name: "Pro Bulk Price Editor",
+    tagline: "Advanced bulk pricing with complex rules, scheduling, and one-click rollback.",
+    description: "An advanced bulk price editing solution with complex pricing rules, scheduling capabilities, and one-click rollback for large Shopify catalogs.",
+    longDescription: "Pro Bulk Price Editor is the advanced version of our pricing tools, built specifically for Shopify merchants managing large catalogs with complex pricing needs. It supports multi-tier pricing rules, compound discounts, collection-based targeting, and advanced scheduling with timezone support. The one-click rollback system maintains a complete price history, letting you revert any change instantly. Perfect for Shopify Plus merchants running enterprise-level promotional campaigns.",
+    platform: "Shopify",
+    features: ["Advanced discount scheduling", "Complex pricing rules", "One-click rollback", "Collection-based targeting", "Price history log", "Conflict prevention"],
+    featureDetails: [
+      { title: "Advanced Scheduling", desc: "Schedule price changes with timezone support, recurring schedules, and multi-phase campaigns. Set up a 4-week promotional calendar in minutes." },
+      { title: "Complex Pricing Rules", desc: "Create multi-tier rules — different discounts for different collections, product types, price ranges, or tags. Stack rules intelligently." },
+      { title: "Instant Rollback", desc: "Every price change is recorded. Rollback to any previous state with a single click — last change, yesterday's prices, or any point in history." },
+      { title: "Collection Targeting", desc: "Target price changes to specific collections, smart collections, or product tags. Apply different discounts to different segments of your catalog." },
+      { title: "Price History & Audit Trail", desc: "Complete log of all price changes with timestamps, who made them, and the before/after values. Essential for compliance and auditing." },
+      { title: "Conflict Prevention", desc: "The system detects overlapping schedules and conflicting rules before execution. Prevents accidental double-discounting or pricing errors." },
+    ],
+    benefits: [
+      "Handle enterprise-level pricing complexity with ease",
+      "Run sophisticated promotional campaigns automatically",
+      "Zero risk with comprehensive rollback capabilities",
+      "Full audit trail for pricing compliance",
+      "Save 25+ hours per week on manual pricing work",
+      "Prevent costly pricing errors with conflict detection",
+    ],
+    howItWorks: [
+      { step: "01", title: "Define Rules", desc: "Create pricing rules targeting specific collections, tags, or product types. Set percentage or fixed-amount discounts." },
+      { step: "02", title: "Schedule Campaigns", desc: "Set start and end dates with timezone support. Create recurring schedules for weekly or monthly promotions." },
+      { step: "03", title: "Execute & Rollback", desc: "Rules execute automatically at scheduled times. When campaigns end, prices rollback automatically or with one click." },
+    ],
+    plans: [
+      {
+        name: "Free",
+        price: "Free",
+        period: "",
+        features: [
+          "For SHOPIFY STAFF Stores",
+          "For SHOPIFY PARTNER Stores",
+          "For SHOPIFY TRIAL Stores",
+          "Unlimited SKUs",
+        ],
+      },
+      {
+        name: "Basic",
+        price: "$20",
+        period: "/ year",
+        note: "LIMITED TIME PRICING",
+        features: [
+          "Unlimited Products",
+          "Unlimited Edit Tasks",
+          "Unlimited Schedule Tasks",
+          "Rollback Prices Anytime",
+          "Advanced Filters",
+          "Price History",
+          "Variant Level Edits",
+        ],
+      },
+      {
+        name: "Pro",
+        price: "$40",
+        period: "/ year",
+        note: "LIMITED TIME PRICING",
+        features: [
+          "All features from Basic Plan",
+          "Daily and Weekly Recurring Tasks",
+        ],
+      },
+    ],
+    reviews: [
+      { rating: 5, quote: "The scheduling and rollback features are game changers for our seasonal campaigns.", author: "Anna F.", role: "eCommerce Manager, Sweden", date: "Mar 2025" },
+      { rating: 5, quote: "We run 50+ concurrent pricing campaigns. Pro Bulk handles it all without breaking a sweat.", author: "Robert M.", role: "Shopify Plus Merchant, USA", date: "Feb 2025" },
+      { rating: 4, quote: "The conflict detection caught a pricing error that would have cost us thousands.", author: "Katherine Y.", role: "Operations Director, Canada", date: "Jan 2025" },
+    ],
+    externalUrl: "https://apps.shopify.com/pro-bulk-price-editor",
+    color: "#EF4444",
+    icon: "🏷️",
+    stats: [{ value: "8K+", label: "Installs" }, { value: "4.7★", label: "Rating" }, { value: "30M+", label: "Prices Changed" }],
+    testimonial: { quote: "The scheduling and rollback features are game changers for our seasonal campaigns.", author: "Anna F.", role: "eCommerce Manager, Sweden" },
   },
   {
     slug: "watchlyst",
@@ -123,9 +301,8 @@ export const apps: AppData[] = [
       { step: "03", title: "Price Drops, Sales Convert", desc: "When you lower a price or run a sale, Watchlyst automatically emails all subscribers. They click through and buy at 3-5x normal conversion rates." },
     ],
     plans: [
-      { name: "Free", price: "$0", period: "/month", features: ["Up to 100 subscribers", "Basic templates", "Price drop alerts", "Email support"] },
-      { name: "Pro", price: "$4.99", period: "/month", features: ["Up to 5,000 subscribers", "Custom templates", "Analytics dashboard", "Priority support"], highlighted: true },
-      { name: "Enterprise", price: "$14.99", period: "/month", features: ["Unlimited subscribers", "Advanced analytics", "Custom workflows", "Dedicated support"] },
+      { name: "Free Plan", price: "Free", period: "", features: ["Unlimited Alerts"] },
+      { name: "Basic Plan", price: "$5", period: "/ month", features: ["Unlimited Alerts", "Multi-Language Support", "Multi-Region Support"] },
     ],
     reviews: [
       { rating: 5, quote: "Watchlyst brought back over 200 lost customers in the first month alone. The ROI is incredible.", author: "Sarah L.", role: "eCommerce Owner, UK", date: "Mar 2025" },
@@ -168,9 +345,31 @@ export const apps: AppData[] = [
       { step: "03", title: "Sell with Confidence", desc: "Connectr runs 24/7 in the background, keeping everything in perfect sync. Focus on growing your business while we handle the operations." },
     ],
     plans: [
-      { name: "Starter", price: "$9.99", period: "/month", features: ["Up to 500 SKUs", "Hourly sync", "Basic order routing", "Email support"] },
-      { name: "Growth", price: "$19.99", period: "/month", features: ["Up to 5,000 SKUs", "Real-time sync", "Multi-warehouse", "Priority support"], highlighted: true },
-      { name: "Enterprise", price: "$49.99", period: "/month", features: ["Unlimited SKUs", "Custom sync rules", "Dedicated account manager", "SLA guarantee"] },
+      {
+        name: "Free plan",
+        price: "Free",
+        period: "",
+        features: [
+          "Stores under the Shopify trial period",
+          "Upto 25 SKUS",
+        ],
+      },
+      {
+        name: "Basic Maintenance",
+        price: "$6",
+        period: "/ month",
+        note: "$0.01 per SKU pulled from Amazon",
+        features: [
+          "Import all SKUs with Complete Listing",
+          "Auto Tags",
+          "Price & Inventory Sync",
+          "Multi-region",
+          "Import Reviews",
+          "Export Data",
+          "Button Link",
+          "Ship with FBA",
+        ],
+      },
     ],
     reviews: [
       { rating: 5, quote: "Connectr eliminated overselling completely. Our multi-channel ops run on autopilot now.", author: "David R.", role: "Multi-channel Seller, Canada", date: "Mar 2025" },
@@ -213,9 +412,42 @@ export const apps: AppData[] = [
       { step: "03", title: "Preview & Save", desc: "Review all your changes in a clear diff view. When everything looks good, save with one click. Changes are applied instantly to your store." },
     ],
     plans: [
-      { name: "Free", price: "$0", period: "/month", features: ["Up to 50 products", "Basic editing", "Tag management", "Email support"] },
-      { name: "Pro", price: "$9.99", period: "/month", features: ["Up to 5,000 products", "All field types", "Bulk image management", "Priority support"], highlighted: true },
-      { name: "Enterprise", price: "$24.99", period: "/month", features: ["Unlimited products", "Metafield editing", "Version history", "Dedicated support"] },
+      {
+        name: "Free",
+        price: "Free",
+        period: "",
+        features: [
+          "For SHOPIFY STAFF Stores",
+          "For SHOPIFY PARTNER Stores",
+          "For SHOPIFY TRIAL Stores",
+          "Unlimited Products",
+        ],
+      },
+      {
+        name: "Basic Plan",
+        price: "$30",
+        period: "/ year",
+        note: "LIMITED TIME PRICING",
+        features: [
+          "Unlimited products",
+          "Edit Product Tags",
+          "Edit Product Title",
+          "Edit Product Prices",
+          "Edit inventory, 15+ Attributes",
+          "Rollback Anytime",
+          "CSV Export",
+        ],
+      },
+      {
+        name: "Pro Plan",
+        price: "$70",
+        period: "/ year",
+        note: "LIMITED TIME PRICING",
+        features: [
+          "All features from Basic Plan",
+          "Daily and Weekly Recurring Tasks",
+        ],
+      },
     ],
     reviews: [
       { rating: 5, quote: "Bolt saved us 20+ hours per week on product management. The inline editing is a game changer.", author: "Maria S.", role: "Shopify Merchant, Australia", date: "Mar 2025" },
@@ -258,8 +490,7 @@ export const apps: AppData[] = [
       { step: "03", title: "Stay Compliant", desc: "Dual runs automatically, updating prices whenever you make changes. Full tax transparency for every customer, every time." },
     ],
     plans: [
-      { name: "Free", price: "$0", period: "/month", features: ["Basic dual pricing", "Product pages only", "Standard labels", "Email support"] },
-      { name: "Pro", price: "$4.99", period: "/month", features: ["All page types", "Custom labels", "Multi-tax rates", "Priority support"], highlighted: true },
+      { name: "Basic", price: "$45", period: "/ year", features: [] },
     ],
     reviews: [
       { rating: 5, quote: "Dual made our B2B pricing transparent. Customers love seeing both prices side by side.", author: "Thomas W.", role: "B2B Merchant, Germany", date: "Mar 2025" },
@@ -302,8 +533,52 @@ export const apps: AppData[] = [
       { step: "03", title: "Earn Commissions", desc: "Visitors browse your store, click the external buy buttons, and purchase on the retailer's site. You earn affiliate commissions on every sale." },
     ],
     plans: [
-      { name: "Free", price: "$0", period: "/month", features: ["Up to 25 products", "1 link per product", "Basic styling", "Email support"] },
-      { name: "Pro", price: "$3.99", period: "/month", features: ["Unlimited products", "Multiple links", "Click tracking", "Priority support"], highlighted: true },
+      {
+        name: "Free plan",
+        price: "Free",
+        period: "",
+        features: [
+          "For stores on the Shopify trial period",
+          "Unlimited links.",
+        ],
+      },
+      {
+        name: "Basic plan",
+        price: "$25",
+        period: "/ year",
+        features: [
+          "Unlimited Links",
+          "Unlimited Products",
+          "Bulk Editor",
+          "Links on Collection Pages",
+          "Click Tracking",
+          "Button Customization Free Support",
+          "CSV import",
+        ],
+      },
+      {
+        name: "Pro Plan",
+        price: "$35",
+        period: "/ year",
+        features: [
+          "Basic Plan +",
+          "Variant Level Links",
+          "Multiple Links per Product",
+          "Comparison Table Links",
+          "Sticky Button",
+          "Chrome Extension Product Importer",
+        ],
+      },
+      {
+        name: "Gold Plan",
+        price: "$50",
+        period: "/ year",
+        features: [
+          "Pro Plan +",
+          "Link Masking",
+          "In-App Stats",
+        ],
+      },
     ],
     reviews: [
       { rating: 5, quote: "Outlink turned our Shopify store into a powerful affiliate hub. Setup took minutes.", author: "Emily C.", role: "Affiliate Marketer, USA", date: "Mar 2025" },
@@ -346,8 +621,7 @@ export const apps: AppData[] = [
       { step: "03", title: "Review & Import", desc: "Review the extracted data, make any edits, and import. Products appear in your Shopify store with all details intact." },
     ],
     plans: [
-      { name: "Free", price: "$0", period: "/month", features: ["Up to 20 imports/month", "Basic sites", "Manual import", "Email support"] },
-      { name: "Pro", price: "$7.99", period: "/month", features: ["Unlimited imports", "All sites", "Scheduled imports", "Priority support"], highlighted: true },
+      { name: "Basic Plan", price: "$6", period: "/ month", features: ["Unlimited Products"] },
     ],
     reviews: [
       { rating: 5, quote: "Robo imports products from any site we need. The smart mapping saves hours of manual work.", author: "Kevin P.", role: "Dropshipper, Netherlands", date: "Mar 2025" },
@@ -390,8 +664,46 @@ export const apps: AppData[] = [
       { step: "03", title: "Customize & Place", desc: "Adjust size, color, and spacing. Drag the icon into your product description exactly where you want it. Publish and see the results instantly." },
     ],
     plans: [
-      { name: "Free", price: "$0", period: "/month", features: ["1,000 basic icons", "Basic customization", "Product descriptions", "Email support"] },
-      { name: "Pro", price: "$4.99", period: "/month", features: ["100,000+ icons", "Full customization", "Feature blocks", "Priority support"], highlighted: true },
+      {
+        name: "Free",
+        price: "Free",
+        period: "",
+        features: [
+          "For Users on Shopify Free Trial",
+          "For Shopify Staff Accounts",
+          "All Features",
+        ],
+      },
+      {
+        name: "Basic",
+        price: "$5",
+        period: "/ month",
+        features: [
+          "100,000+ Icons",
+          "Custom Styling",
+          "Own Images",
+          "Dynamic Data Fields",
+          "20+ Display Rules",
+          "Schedule Visibility",
+          "Links & Tooltips",
+          "Blacklisting",
+        ],
+      },
+      {
+        name: "Pro Plan",
+        price: "$10",
+        period: "/ month",
+        features: [
+          "Basic Plan All",
+          "Country Restriction",
+          "Order Counter",
+          "Dynamic Metafields",
+          "Countdown Timer",
+          "Highlight Groups",
+          "Badges & Stickers",
+          "Summary Notes",
+        ],
+      },
     ],
     reviews: [
       { rating: 5, quote: "T2 Icons made our product pages look professional instantly. Customers love the visual details.", author: "Lisa H.", role: "Shopify Store Owner, USA", date: "Mar 2025" },
@@ -406,7 +718,7 @@ export const apps: AppData[] = [
   },
   {
     slug: "shipr",
-    name: "Shipr",
+    name: "Shipr for Amazon FBA / MCF",
     tagline: "Fulfill Shopify orders via Amazon FBA and keep inventory perfectly synced across both platforms.",
     description: "Connect your Shopify store with Amazon FBA for order fulfillment. Automatically sync inventory and route orders through Amazon's logistics network.",
     longDescription: "Shipr bridges the gap between your Shopify store and Amazon's world-class fulfillment network (FBA). When a customer places an order on your Shopify store, Shipr automatically routes it to Amazon FBA for picking, packing, and shipping — leveraging Amazon's fast delivery times and logistics infrastructure. Inventory levels sync in real-time between both platforms, so you always know exactly what's in stock. Shipr handles multi-SKU products, return management, and fulfillment status tracking, giving you enterprise-grade logistics without the enterprise complexity.",
@@ -434,9 +746,36 @@ export const apps: AppData[] = [
       { step: "03", title: "Auto-Fulfill Orders", desc: "When Shopify orders come in, Shipr routes them to FBA automatically. Amazon ships the products, and tracking info syncs back to Shopify." },
     ],
     plans: [
-      { name: "Starter", price: "$9.99", period: "/month", features: ["Up to 100 orders/month", "Basic sync", "Standard routing", "Email support"] },
-      { name: "Growth", price: "$19.99", period: "/month", features: ["Up to 1,000 orders/month", "Real-time sync", "Smart routing", "Priority support"], highlighted: true },
-      { name: "Scale", price: "$39.99", period: "/month", features: ["Unlimited orders", "Multi-warehouse", "Return management", "Dedicated support"] },
+      {
+        name: "Basic Plan",
+        price: "$10",
+        period: "/ month",
+        features: [
+          "Unlimited Orders",
+          "Unlimited SKUs",
+          "Unlimited Marketplaces",
+          "Auto/Manual Mode",
+          "Email Notifications",
+          "Shipping Speed Options",
+          "Tracking Sync",
+          "SKU Mapping",
+        ],
+        note: "7-day free trial",
+      },
+      {
+        name: "Pro Plan",
+        price: "$20",
+        period: "/ month",
+        features: ["Everything from Basic", "Inventory Sync", "Manual Sync"],
+        note: "7-day free trial",
+      },
+      {
+        name: "Gold Plan",
+        price: "$50",
+        period: "/ month",
+        features: ["Everything from Pro", "Continous Auto Sync"],
+        note: "7-day free trial",
+      },
     ],
     reviews: [
       { rating: 5, quote: "Shipr made Amazon FBA fulfillment seamless. Our shipping times dropped by 60%.", author: "Alex T.", role: "eCommerce Merchant, UK", date: "Mar 2025" },
@@ -479,8 +818,62 @@ export const apps: AppData[] = [
       { step: "03", title: "Auto-Sync Active", desc: "Duplicate runs 24/7, keeping inventory in sync across all shared-SKU products. You'll never oversell a shared SKU again." },
     ],
     plans: [
-      { name: "Free", price: "$0", period: "/month", features: ["Up to 50 SKU pairs", "Hourly sync", "Basic logging", "Email support"] },
-      { name: "Pro", price: "$5.99", period: "/month", features: ["Unlimited SKU pairs", "Real-time sync", "Full history", "Priority support"], highlighted: true },
+      {
+        name: "BASIC PLAN (FREE)",
+        price: "Free to install",
+        period: "",
+        note: "PRO PLAN ($0 for Full Sync Support)",
+        features: [
+          "For SHOPIFY START stores",
+          "For SHOPIFY PARTNER Stores",
+          "For SHOPIFY TRIAL Stores",
+          "For PAUSE AND BUILD Stores",
+          "All Features",
+          "Unlimited SKUs",
+        ],
+      },
+      {
+        name: "BASIC PLAN",
+        price: "$5",
+        period: "/ month",
+        note: "PRO PLAN ($10 for Full Sync Support)",
+        features: [
+          "For SHOPIFY BASIC stores",
+          "Unlimited SKUs",
+          "Unlimited Updates",
+          "Sync History",
+          "1-Click Restock",
+          "Multi-location Support",
+        ],
+      },
+      {
+        name: "ESTABLISHED PLAN",
+        price: "$12",
+        period: "/ month",
+        note: "PRO PLAN ($24 for Full Sync Support)",
+        features: [
+          "For SHOPIFY & ADVANCED SHOPIFY stores",
+          "Unlimited SKUs",
+          "Unlimited Updates",
+          "Sync History",
+          "1-Click Restock",
+          "Multi-location Support",
+        ],
+      },
+      {
+        name: "HIGH VOLUME PLAN",
+        price: "$20",
+        period: "/ month",
+        note: "PRO PLAN ($40 for Full Sync Support)",
+        features: [
+          "For SHOPIFY PLUS stores",
+          "Unlimited SKUs",
+          "Unlimited Updates",
+          "Sync History",
+          "1-Click Restock",
+          "Multi-location Support",
+        ],
+      },
     ],
     reviews: [
       { rating: 5, quote: "Duplicate keeps our inventory perfectly synced across shared SKUs. No more overselling.", author: "Michael B.", role: "Shopify Merchant, USA", date: "Mar 2025" },
@@ -568,8 +961,19 @@ export const apps: AppData[] = [
       { step: "03", title: "Publish & Delight", desc: "Save your mappings and the changes are live instantly. Customers now see variant-specific images when they select different options." },
     ],
     plans: [
-      { name: "Free", price: "$0", period: "/month", features: ["Up to 10 products", "Basic mapping", "Standard gallery", "Email support"] },
-      { name: "Pro", price: "$5.99", period: "/month", features: ["Unlimited products", "Bulk mapping", "Video support", "Priority support"], highlighted: true },
+      {
+        name: "Developer",
+        price: "Free",
+        period: "",
+        features: ["For stores under development", "Unlimited products"],
+      },
+      {
+        name: "Basic",
+        price: "$10",
+        period: " / month",
+        features: ["Unlimited products"],
+        note: "7-day free trial",
+      },
     ],
     reviews: [
       { rating: 5, quote: "Clever finally solved our variant image problem. Product pages look 10x better now.", author: "Sophie M.", role: "Fashion Store Owner, France", date: "Mar 2025" },
@@ -656,8 +1060,17 @@ export const apps: AppData[] = [
       { step: "03", title: "Assign & Publish", desc: "Assign the table to individual products or entire collections. Tables appear in the product description automatically." },
     ],
     plans: [
-      { name: "Free", price: "$0", period: "/month", features: ["Up to 10 tables", "Basic columns", "Single product assignment", "Email support"] },
-      { name: "Pro", price: "$4.99", period: "/month", features: ["Unlimited tables", "All column types", "Bulk assignment", "Priority support"], highlighted: true },
+      {
+        name: "Free Plan",
+        price: "Free",
+        period: "",
+        features: [
+          "Up to 500 tables on unlimited products",
+          "Custom Styling",
+          "Dynamic Data Fields",
+          "20+ Display Rules",
+        ],
+      },
     ],
     reviews: [
       { rating: 5, quote: "Clean tables made our product specs look professional and organized. Customers appreciate the clarity.", author: "Hannah K.", role: "Electronics Store, Germany", date: "Mar 2025" },
@@ -700,9 +1113,44 @@ export const apps: AppData[] = [
       { step: "03", title: "Analyze & Optimize", desc: "Monitor badge performance in the analytics dashboard. See which badges drive the most conversions and optimize your strategy." },
     ],
     plans: [
-      { name: "Free", price: "$0", period: "/month", features: ["10 badge presets", "Manual application", "Basic positioning", "Email support"] },
-      { name: "Pro", price: "$5.99", period: "/month", features: ["50+ presets + custom", "Smart rules", "Scheduling", "Priority support"], highlighted: true },
-      { name: "Enterprise", price: "$14.99", period: "/month", features: ["Unlimited badges", "A/B testing", "Full analytics", "Dedicated support"] },
+      {
+        name: "Basic",
+        price: "$5",
+        period: "/ month",
+        features: [
+          "500 Badges on Unlimited Products",
+          "100,000+ Icons",
+          "Full Styling",
+          "Dynamic Data Fields",
+          "20+ Display Rules",
+          "Schedule Visibility",
+          "Links & Tooltips",
+        ],
+        note: "7-day free trial",
+      },
+      {
+        name: "Pro",
+        price: "$10",
+        period: "/ month",
+        features: [
+          "Basic Plan +",
+          "Country Restriction",
+          "Order Counter",
+          "Dynamic Metafields",
+          "Countdown Timer",
+          "Badge Groups",
+          "Highlight Box",
+          "Summary Notes, Banners, and Tables",
+        ],
+        note: "7-day free trial",
+      },
+      {
+        name: "Gold",
+        price: "$20",
+        period: "/ month",
+        features: ["Pro Plan +", "Visitor Counter", "Variant Level Badges"],
+        note: "7-day free trial",
+      },
     ],
     reviews: [
       { rating: 5, quote: "Prime badges increased our conversion rate by 18%. The smart rules are incredibly powerful.", author: "Carlos V.", role: "Shopify Merchant, Spain", date: "Mar 2025" },
@@ -761,53 +1209,8 @@ export const apps: AppData[] = [
     testimonial: { quote: "Fetchr's API is reliable and fast. It powers our entire Amazon data pipeline.", author: "Chen W.", role: "Software Engineer, Singapore" },
   },
   {
-    slug: "probulkpriceeditor",
-    name: "Pro Bulk Price Editor",
-    tagline: "Advanced bulk pricing with complex rules, scheduling, and one-click rollback.",
-    description: "An advanced bulk price editing solution with complex pricing rules, scheduling capabilities, and one-click rollback for large Shopify catalogs.",
-    longDescription: "Pro Bulk Price Editor is the advanced version of our pricing tools, built specifically for Shopify merchants managing large catalogs with complex pricing needs. It supports multi-tier pricing rules, compound discounts, collection-based targeting, and advanced scheduling with timezone support. The one-click rollback system maintains a complete price history, letting you revert any change instantly. Perfect for Shopify Plus merchants running enterprise-level promotional campaigns.",
-    platform: "Shopify",
-    features: ["Advanced discount scheduling", "Complex pricing rules", "One-click rollback", "Collection-based targeting", "Price history log", "Conflict prevention"],
-    featureDetails: [
-      { title: "Advanced Scheduling", desc: "Schedule price changes with timezone support, recurring schedules, and multi-phase campaigns. Set up a 4-week promotional calendar in minutes." },
-      { title: "Complex Pricing Rules", desc: "Create multi-tier rules — different discounts for different collections, product types, price ranges, or tags. Stack rules intelligently." },
-      { title: "Instant Rollback", desc: "Every price change is recorded. Rollback to any previous state with a single click — last change, yesterday's prices, or any point in history." },
-      { title: "Collection Targeting", desc: "Target price changes to specific collections, smart collections, or product tags. Apply different discounts to different segments of your catalog." },
-      { title: "Price History & Audit Trail", desc: "Complete log of all price changes with timestamps, who made them, and the before/after values. Essential for compliance and auditing." },
-      { title: "Conflict Prevention", desc: "The system detects overlapping schedules and conflicting rules before execution. Prevents accidental double-discounting or pricing errors." },
-    ],
-    benefits: [
-      "Handle enterprise-level pricing complexity with ease",
-      "Run sophisticated promotional campaigns automatically",
-      "Zero risk with comprehensive rollback capabilities",
-      "Full audit trail for pricing compliance",
-      "Save 25+ hours per week on manual pricing work",
-      "Prevent costly pricing errors with conflict detection",
-    ],
-    howItWorks: [
-      { step: "01", title: "Define Rules", desc: "Create pricing rules targeting specific collections, tags, or product types. Set percentage or fixed-amount discounts." },
-      { step: "02", title: "Schedule Campaigns", desc: "Set start and end dates with timezone support. Create recurring schedules for weekly or monthly promotions." },
-      { step: "03", title: "Execute & Rollback", desc: "Rules execute automatically at scheduled times. When campaigns end, prices rollback automatically or with one click." },
-    ],
-    plans: [
-      { name: "Starter", price: "$9.99", period: "/month", features: ["Up to 1,000 products", "Basic scheduling", "Manual rollback", "Email support"] },
-      { name: "Pro", price: "$19.99", period: "/month", features: ["Up to 10,000 products", "Advanced rules", "Auto-rollback", "Priority support"], highlighted: true },
-      { name: "Enterprise", price: "$49.99", period: "/month", features: ["Unlimited products", "Complex campaigns", "Full audit trail", "Dedicated support"] },
-    ],
-    reviews: [
-      { rating: 5, quote: "The scheduling and rollback features are game changers for our seasonal campaigns.", author: "Anna F.", role: "eCommerce Manager, Sweden", date: "Mar 2025" },
-      { rating: 5, quote: "We run 50+ concurrent pricing campaigns. Pro Bulk handles it all without breaking a sweat.", author: "Robert M.", role: "Shopify Plus Merchant, USA", date: "Feb 2025" },
-      { rating: 4, quote: "The conflict detection caught a pricing error that would have cost us thousands.", author: "Katherine Y.", role: "Operations Director, Canada", date: "Jan 2025" },
-    ],
-    externalUrl: "https://apps.shopify.com/pro-bulk-price-editor",
-    color: "#EF4444",
-    icon: "🏷️",
-    stats: [{ value: "8K+", label: "Installs" }, { value: "4.7★", label: "Rating" }, { value: "30M+", label: "Prices Changed" }],
-    testimonial: { quote: "The scheduling and rollback features are game changers for our seasonal campaigns.", author: "Anna F.", role: "eCommerce Manager, Sweden" },
-  },
-  {
     slug: "csvbox",
-    name: "CSVbox",
+    name: "CSV Box",
     tagline: "A powerful data importer for SaaS and web apps — CSV upload built for developers.",
     description: "Let your SaaS users import CSV and Excel data seamlessly with smart column mapping, validation, and white-label support.",
     longDescription: "CSVbox is an embeddable data import solution designed for SaaS applications and web apps. It provides a polished, user-friendly interface for your customers to upload CSV and Excel files, map columns to your data schema, validate data, and import seamlessly. CSVbox handles the complexity of data import — messy files, inconsistent formats, missing values, and encoding issues — so your engineering team doesn't have to. With webhook support, REST API integration, white-label branding, and enterprise-grade security, CSVbox is the fastest way to add professional data import to your application.",
@@ -835,9 +1238,71 @@ export const apps: AppData[] = [
       { step: "03", title: "Receive Data", desc: "Users upload files, map columns, and import. Clean, validated data is sent to your backend via webhook or API." },
     ],
     plans: [
-      { name: "Free", price: "$0", period: "/month", features: ["1,000 rows/month", "Basic mapping", "Standard widget", "Community support"] },
-      { name: "Growth", price: "$49", period: "/month", features: ["100,000 rows/month", "Smart mapping", "White-label", "Priority support"], highlighted: true },
-      { name: "Scale", price: "$199", period: "/month", features: ["1M+ rows/month", "Custom validation", "SSO", "Dedicated support"] },
+      {
+        name: "Sandbox",
+        price: "$0",
+        period: " per month",
+        features: [
+          "Imports: 100",
+          "Rows per import: 5",
+          "Remove Branding: No",
+          "Custom Styling: No",
+          "AI Bulk Transforms: No",
+          "Team Members: 3",
+        ],
+      },
+      {
+        name: "Startup",
+        price: "$19",
+        period: " per month",
+        features: [
+          "Imports: 1K",
+          "Rows per import: 10K",
+          "Remove Branding: Yes",
+          "Custom Styling: No",
+          "AI Bulk Transforms: No",
+          "Team Members: 3",
+        ],
+      },
+      {
+        name: "Pro",
+        price: "$49",
+        period: " per month",
+        features: [
+          "Imports: 5K",
+          "Rows per import: 50K",
+          "Remove Branding: Yes",
+          "Custom Styling: Yes",
+          "AI Bulk Transforms: Yes",
+          "Team Members: 5",
+        ],
+      },
+      {
+        name: "Growth",
+        price: "$99",
+        period: " per month",
+        features: [
+          "Imports: 10K",
+          "Rows per import: 100K",
+          "Remove Branding: Yes",
+          "Custom Styling: Yes",
+          "AI Bulk Transforms: Yes",
+          "Team Members: 7",
+        ],
+      },
+      {
+        name: "Plus",
+        price: "$199",
+        period: " per month",
+        features: [
+          "Imports: 10K",
+          "Rows per import: 500K",
+          "Remove Branding: Yes",
+          "Custom Styling: Yes",
+          "AI Bulk Transforms: Yes",
+          "Team Members: 10",
+        ],
+      },
     ],
     reviews: [
       { rating: 5, quote: "CSVbox reduced our customer onboarding time from days to minutes. The UX is flawless.", author: "Mark D.", role: "CTO, SaaS Startup, USA", date: "Mar 2025" },

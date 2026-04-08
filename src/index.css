@@ -103,6 +103,16 @@
     transform: scale(1.02);
   }
 
+  .btn-shopify {
+    @apply inline-flex items-center justify-center font-heading font-bold text-sm px-7 py-3.5 rounded-lg transition-all duration-200;
+    background-color: #95bf47;
+    color: #ffffff;
+  }
+  .btn-shopify:hover {
+    background-color: #7eaa36;
+    transform: scale(1.02);
+  }
+
   .btn-outline {
     @apply inline-flex items-center justify-center font-heading font-bold text-sm px-7 py-3.5 rounded-lg transition-all duration-200 bg-background;
     border: 1.5px solid hsl(var(--primary));
