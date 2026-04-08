@@ -81,6 +81,7 @@ const Contact = () => {
       <Seo
         title="Contact Thalia Technologies | Support and Sales"
         description="Get in touch with Thalia Technologies for product support, questions, and business inquiries."
+        keywords="contact Thalia Technologies, app support, ecommerce software support, merchant help, product inquiries, Thalia contact"
         path="/contact"
       />
       {/* Hero */}

@@ -45,6 +45,7 @@ const About = () => {
       <Seo
         title="About Thalia Technologies | Our Story, Team, and Mission"
         description="Learn about Thalia Technologies, our mission to solve real ecommerce problems, and the team behind our merchant-focused software products."
+        keywords="about Thalia Technologies, Thalia team, ecommerce software company, merchant-first products, SaaS product company, ecommerce mission"
         path="/about"
       />
 

@@ -7,12 +7,13 @@ const DEFAULT_OG_IMAGE = `${SITE_URL}/og-image.png`;
 type SeoProps = {
   title: string;
   description: string;
+  keywords?: string;
   path?: string;
   image?: string;
   noindex?: boolean;
 };
 
-const Seo = ({ title, description, path = "/", image = DEFAULT_OG_IMAGE, noindex = false }: SeoProps) => {
+const Seo = ({ title, description, keywords, path = "/", image = DEFAULT_OG_IMAGE, noindex = false }: SeoProps) => {
   const canonical = `${SITE_URL}${path}`;
   const robots = noindex ? "noindex, nofollow" : "index, follow";
 
@@ -20,6 +21,7 @@ const Seo = ({ title, description, path = "/", image = DEFAULT_OG_IMAGE, noindex
     <Helmet>
       <title>{title}</title>
       <meta name="description" content={description} />
+      {keywords && <meta name="keywords" content={keywords} />}
       <meta name="robots" content={robots} />
       <link rel="canonical" href={canonical} />
 

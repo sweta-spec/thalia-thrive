@@ -63,9 +63,11 @@ const fadeUp = (delay = 0) => ({
 const Index = () => {
   return (
     <Layout>
+      
       <Seo
         title="Thalia Technologies | Ecommerce Apps for Growth"
         description="Thalia builds focused ecommerce apps for Shopify, Amazon, and BigCommerce to help merchants automate workflows, increase revenue, and grow faster."
+        keywords="Thalia Technologies, ecommerce apps, Shopify apps, Amazon apps, BigCommerce apps, ecommerce automation, ecommerce growth tools, merchant software"
         path="/"
       />
       

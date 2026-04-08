@@ -19,6 +19,7 @@ const CaseStudies = () => {
       <Seo
         title="Case Studies | Thalia Technologies"
         description="See real merchant success stories and measurable outcomes achieved with Thalia Technologies apps."
+        keywords="Thalia case studies, ecommerce success stories, Shopify app results, merchant growth metrics, ecommerce ROI, app performance"
         path="/case-studies"
       />
       {/* Hero */}

@@ -8,6 +8,7 @@ const NotFound = () => {
       <Seo
         title="Page Not Found | Thalia Technologies"
         description="The page you are looking for could not be found."
+        keywords="404, page not found, Thalia Technologies"
         path="/404"
         noindex
       />

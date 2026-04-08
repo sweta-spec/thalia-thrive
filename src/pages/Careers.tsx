@@ -39,6 +39,7 @@ const Careers = () => {
       <Seo
         title="Careers at Thalia Technologies | Join Our Team"
         description="Explore career opportunities at Thalia Technologies and help build ecommerce software used by businesses worldwide."
+        keywords="Thalia careers, ecommerce jobs, SaaS jobs, software engineer jobs, product design jobs, remote jobs, tech careers India"
         path="/careers"
       />
       {/* Hero */}

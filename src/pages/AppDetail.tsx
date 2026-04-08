@@ -54,6 +54,7 @@ const AppDetail = () => {
       <Seo
         title={`${appPageName} | Thalia Technologies`}
         description={app.description}
+        keywords={`${appPageName}, ${app.platform} app, ${app.features.slice(0, 4).join(", ")}, Thalia Technologies`}
         path={`/apps/${app.slug}`}
       />
       {/* Breadcrumb */}

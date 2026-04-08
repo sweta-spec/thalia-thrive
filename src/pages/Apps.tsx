@@ -12,6 +12,7 @@ const Apps = () => {
       <Seo
         title="Thalia Apps | Ecommerce Tools for Shopify, Amazon, and More"
         description="Explore Thalia's full suite of ecommerce apps for pricing, catalog management, notifications, sync, badges, and merchant growth."
+        keywords="Thalia apps, ecommerce tools, Shopify app collection, Amazon sync app, bulk editor app, product badges app, pricing app, merchant productivity"
         path="/apps"
       />
       {/* Hero */}
