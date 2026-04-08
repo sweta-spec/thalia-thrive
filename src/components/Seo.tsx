@@ -2,7 +2,7 @@ import { Helmet } from "react-helmet";
 
 const SITE_NAME = "Thalia Technologies";
 const SITE_URL = "https://thaliatechnologies.com";
-const DEFAULT_OG_IMAGE = `${SITE_URL}/og-image.png`;
+const DEFAULT_OG_IMAGE = `${SITE_URL}/og-image.svg`;
 
 type SeoProps = {
   title: string;
@@ -11,11 +11,49 @@ type SeoProps = {
   path?: string;
   image?: string;
   noindex?: boolean;
+  structuredData?: Record<string, unknown> | Array<Record<string, unknown>>;
 };
 
-const Seo = ({ title, description, keywords, path = "/", image = DEFAULT_OG_IMAGE, noindex = false }: SeoProps) => {
+const Seo = ({
+  title,
+  description,
+  keywords,
+  path = "/",
+  image = DEFAULT_OG_IMAGE,
+  noindex = false,
+  structuredData,
+}: SeoProps) => {
   const canonical = `${SITE_URL}${path}`;
   const robots = noindex ? "noindex, nofollow" : "index, follow";
+  const websiteSchema = {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    name: SITE_NAME,
+    url: SITE_URL,
+    potentialAction: {
+      "@type": "SearchAction",
+      target: `${SITE_URL}/apps?query={search_term_string}`,
+      "query-input": "required name=search_term_string",
+    },
+  };
+  const organizationSchema = {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    name: SITE_NAME,
+    url: SITE_URL,
+    logo: `${SITE_URL}/thalia-logo.jpg`,
+    contactPoint: {
+      "@type": "ContactPoint",
+      contactType: "customer support",
+      email: "info@thaliatechnologies.com",
+    },
+  };
+  const extraSchemas = structuredData
+    ? Array.isArray(structuredData)
+      ? structuredData
+      : [structuredData]
+    : [];
+  const allSchemas = [websiteSchema, organizationSchema, ...extraSchemas];
 
   return (
     <Helmet>
@@ -36,6 +74,7 @@ const Seo = ({ title, description, keywords, path = "/", image = DEFAULT_OG_IMAG
       <meta name="twitter:title" content={title} />
       <meta name="twitter:description" content={description} />
       <meta name="twitter:image" content={image} />
+      <script type="application/ld+json">{JSON.stringify(allSchemas)}</script>
     </Helmet>
   );
 };

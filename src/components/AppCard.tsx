@@ -13,7 +13,7 @@ const AppCard = ({ app }: { app: AppData; index?: number }) => {
         </div>
         <div className="w-12 h-12 rounded-[14px] flex items-center justify-center text-2xl mb-4 overflow-hidden" style={{ backgroundColor: `${app.color}18` }}>
           {logo ? (
-            <img src={logo} alt="" className="w-full h-full object-contain p-1" width={48} height={48} />
+            <img src={logo} alt={`${app.name} logo`} className="w-full h-full object-contain p-1" width={48} height={48} />
           ) : (
             <span>{app.icon}</span>
           )}
@@ -28,7 +28,7 @@ const AppCard = ({ app }: { app: AppData; index?: number }) => {
     <Link to={`/apps/${app.slug}`} className="block card-elevated p-6 h-full group">
       <div className="w-12 h-12 rounded-[14px] flex items-center justify-center text-2xl mb-4 overflow-hidden" style={{ backgroundColor: `${app.color}18` }}>
         {logo ? (
-          <img src={logo} alt="" className="w-full h-full object-contain p-1" width={48} height={48} />
+          <img src={logo} alt={`${app.name} logo`} className="w-full h-full object-contain p-1" width={48} height={48} />
         ) : (
           <span>{app.icon}</span>
         )}

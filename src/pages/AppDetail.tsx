@@ -48,6 +48,46 @@ const AppDetail = () => {
             : app.slug === "csvbox"
               ? "CSV Box"
         : app.name;
+  const appStructuredData = {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    name: appPageName,
+    applicationCategory: "BusinessApplication",
+    operatingSystem: "Web",
+    description: app.description,
+    offers: app.plans.length
+      ? app.plans.map((plan) => ({
+          "@type": "Offer",
+          name: plan.name,
+          price: plan.price.replace(/[^0-9.]/g, "") || "0",
+          priceCurrency: "USD",
+        }))
+      : undefined,
+  };
+  const breadcrumbStructuredData = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      {
+        "@type": "ListItem",
+        position: 1,
+        name: "Home",
+        item: "https://thaliatechnologies.com/",
+      },
+      {
+        "@type": "ListItem",
+        position: 2,
+        name: "Apps",
+        item: "https://thaliatechnologies.com/apps",
+      },
+      {
+        "@type": "ListItem",
+        position: 3,
+        name: appPageName,
+        item: `https://thaliatechnologies.com/apps/${app.slug}`,
+      },
+    ],
+  };
 
   return (
     <Layout>
@@ -56,6 +96,7 @@ const AppDetail = () => {
         description={app.description}
         keywords={`${appPageName}, ${app.platform} app, ${app.features.slice(0, 4).join(", ")}, Thalia Technologies`}
         path={`/apps/${app.slug}`}
+        structuredData={[appStructuredData, breadcrumbStructuredData]}
       />
       {/* Breadcrumb */}
       <div className="section-container pt-6">

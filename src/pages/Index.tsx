@@ -6,8 +6,8 @@ import SectionHeading from "@/components/SectionHeading";
 import AppCard from "@/components/AppCard";
 import { apps } from "@/data/apps";
 import heroImg from "@/assets/hero-dashboard (2).jpg";
-import ecommerceImg from "@/assets/ecommerce-tools.jpg";
-import valuesImg from "@/assets/values-illustration.jpg";
+import ecommerceImg from "@/assets/ecommerce-tools new.jpg";
+import valuesImg from "@/assets/values-illustration new.jpg";
 import statsBg from "@/assets/stats-bg.jpg";
 import shopifyLogo from "@/assets/shopify_logo_black.png";
 import wixLogo from "@/assets/wix logo.png";
@@ -63,7 +63,7 @@ const fadeUp = (delay = 0) => ({
 const Index = () => {
   return (
     <Layout>
-      
+
       <Seo
         title="Thalia Technologies | Ecommerce Apps for Growth"
         description="Thalia builds focused ecommerce apps for Shopify, Amazon, and BigCommerce to help merchants automate workflows, increase revenue, and grow faster."
@@ -178,7 +178,7 @@ const Index = () => {
       {/* Stats */}
       <section className="relative" style={{ paddingTop: 80, paddingBottom: 80 }}>
         <div className="absolute inset-0">
-          <img src={statsBg} alt="" className="w-full h-full object-cover" />
+          <img src={statsBg} alt="Abstract network background pattern" className="w-full h-full object-cover" />
           <div className="absolute inset-0 bg-foreground/70" />
         </div>
         <div className="section-container relative">
