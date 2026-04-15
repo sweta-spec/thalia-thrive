@@ -25,24 +25,6 @@ const Footer = () => {
             <p className="text-sm leading-relaxed opacity-60">
               Software that Makes a Difference.
             </p>
-            <div
-              className="mt-5 grid grid-cols-3 gap-2 max-w-[8rem] sm:max-w-none sm:grid-cols-6"
-              role="list"
-            >
-              {socialLinks.map(({ href, label, Icon }) => (
-                <a
-                  key={label}
-                  href={href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  role="listitem"
-                  aria-label={label}
-                  className="inline-flex h-9 w-9 items-center justify-center rounded-lg text-primary-foreground opacity-65 hover:opacity-100 hover:bg-white/10 transition-all sm:h-10 sm:w-10"
-                >
-                  <Icon className="h-[18px] w-[18px] sm:h-5 sm:w-5" aria-hidden />
-                </a>
-              ))}
-            </div>
           </div>
 
           <div>
@@ -66,13 +48,6 @@ const Footer = () => {
           </div>
 
           <div>
-            <h4 className="font-heading font-bold text-xs uppercase tracking-widest mb-4 opacity-40">Support</h4>
-            <div className="flex flex-col gap-2.5">
-              <Link to="/case-studies" className="text-sm opacity-65 hover:opacity-100 transition-opacity">Case Studies</Link>
-            </div>
-          </div>
-
-          <div>
             <h4 className="font-heading font-bold text-xs uppercase tracking-widest mb-4 opacity-40">Legal</h4>
             <div className="flex flex-col gap-2.5">
               <a
@@ -91,6 +66,24 @@ const Footer = () => {
               >
                 Terms of Service
               </a>
+            </div>
+          </div>
+
+          <div className="md:col-span-2 lg:col-span-1">
+            <h4 className="font-heading font-bold text-xs uppercase tracking-widest mb-4 opacity-40">Follow us on:</h4>
+            <div className="flex flex-wrap gap-2.5">
+              {socialLinks.map(({ href, label, Icon }) => (
+                <a
+                  key={`ring-${label}`}
+                  href={href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={label}
+                  className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-white/25 text-primary-foreground opacity-80 hover:opacity-100 hover:border-white/55 hover:bg-white/10 transition-all"
+                >
+                  <Icon className="h-[18px] w-[18px]" aria-hidden />
+                </a>
+              ))}
             </div>
           </div>
         </div>

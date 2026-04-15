@@ -36,6 +36,20 @@ import fyleboxLogo from "@/assets/fylebox-logo.png";
 import roboWebsiteHero from "@/assets/Robo website Image.png";
 import proBulkWebsiteHero from "@/assets/Pro Bulk Price Editor website.png";
 import t2WebsiteHero from "@/assets/app-t2.jpg";
+import spreadrAltHero from "@/assets/app-spreadr 1.jpg";
+import watchlystAltHero from "@/assets/app-watchlyst (1).jpg";
+import connectrAltHero from "@/assets/app-connectr (1).jpg";
+import boltAltHero from "@/assets/app-bolt (1).jpg";
+import shiprAltHero from "@/assets/app-shipr (1).jpg";
+import duplicateAltHero from "@/assets/app-duplicate (1).jpg";
+import sleekAltHero from "@/assets/app-sleek (1).jpg";
+import cleverAltHero from "@/assets/app-clever (2).jpg";
+import primeAltHero from "@/assets/Prime.jpg";
+import outlinkAltHero from "@/assets/app-outlink (1).jpg";
+import dualAltHero from "@/assets/app-dual.png";
+import proBulkAltHero from "@/assets/app-pro.jpg";
+import roboAltHero from "@/assets/app-robo.jpg";
+import t2AltHero from "@/assets/app-t2.jpg";
 
 export interface AppData {
   slug: string;
@@ -69,9 +83,20 @@ try {
 } catch (e) { /* ignore */ }
 
 /** Website / product screenshots for app detail hero (JPGs from glob; PNGs below). */
-appImages.robo = roboWebsiteHero;
-appImages.probulkpriceeditor = proBulkWebsiteHero;
-appImages.t2icons = t2WebsiteHero;
+appImages.spreadr = spreadrAltHero;
+appImages.watchlyst = watchlystAltHero;
+appImages.connectr = connectrAltHero;
+appImages.bolt = boltAltHero;
+appImages.dual = dualAltHero;
+appImages.outlink = outlinkAltHero;
+appImages.robo = roboAltHero || roboWebsiteHero;
+appImages.t2icons = t2AltHero || t2WebsiteHero;
+appImages.shipr = shiprAltHero;
+appImages.duplicate = duplicateAltHero;
+appImages.sleek = sleekAltHero;
+appImages.clever = cleverAltHero;
+appImages.prime = primeAltHero;
+appImages.probulkpriceeditor = proBulkAltHero || proBulkWebsiteHero;
 
 export const getAppImage = (slug: string): string | undefined => appImages[slug];
 

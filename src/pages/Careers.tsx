@@ -4,7 +4,7 @@ import { ArrowRight, Building, Rocket, Brain, Heart, GraduationCap, HeartPulse, 
 import Layout from "@/components/Layout";
 import SectionHeading from "@/components/SectionHeading";
 import Seo from "@/components/Seo";
-import careersImg from "@/assets/careers-workspace.jpg";
+import careersImg from "@/assets/career-workplace.jpg";
 
 /** External careers / job listings (opens in new tab from Apply CTAs). */
 const JOB_LISTINGS_URL = "https://wellfound.com/company/thalia-technologies-1";

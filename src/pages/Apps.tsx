@@ -3,7 +3,7 @@ import Layout from "@/components/Layout";
 import SectionHeading from "@/components/SectionHeading";
 import AppCard from "@/components/AppCard";
 import { apps } from "@/data/apps";
-import appsImg from "@/assets/Ecommerce apps.jpg";
+import appsImg from "@/assets/Product-apps.jpg";
 import Seo from "@/components/Seo";
 
 const Apps = () => {
